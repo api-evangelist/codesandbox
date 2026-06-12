@@ -1,0 +1,153 @@
+---
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: CodeSandbox
+providerId: codesandbox
+created: '2026-06-12'
+modified: '2026-06-12'
+reconciled: true
+tags:
+  - Developer Tools
+  - Cloud IDE
+  - AI Sandboxes
+  - Virtual Machines
+description: >-
+  CodeSandbox offers a Free tier with 400 monthly credits, a Build plan for
+  individuals, a Scale plan for teams, and Enterprise options, all billed by
+  VM credit consumption at $0.01486 per credit.
+sources:
+  - https://codesandbox.io/pricing
+  - https://codesandbox.io/docs/sdk/pricing
+plans:
+  - id: codesandbox-free
+    name: Free
+    type: freemium
+    description: >-
+      Free workspace with 400 monthly VM credits (~40 hours on a Nano VM),
+      up to 10 concurrent VMs, browser sandbox access, and CodeSandbox SDK
+      lite access.
+    entries:
+      - label: Monthly VM Credits
+        name: monthly-credits
+        type: quota
+        metric: credits
+        limit: 400
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Concurrent VMs
+        name: concurrent-vms
+        type: quota
+        metric: vms
+        limit: 10
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: VM Runtime (Nano, 2 vCPU / 2 GiB)
+        name: vm-nano-runtime
+        type: metered
+        metric: hours
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.15'
+        userMultiplied: false
+  - id: codesandbox-build
+    name: Build
+    type: paid
+    description: >-
+      Individual developer plan with 40 hours of monthly VM credits included,
+      VM specs up to 4 vCPUs + 8 GiB RAM, and CodeSandbox SDK lite access.
+    entries:
+      - label: Monthly VM Hours Included
+        name: monthly-vm-hours
+        type: quota
+        metric: hours
+        limit: 40
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '9.00'
+        userMultiplied: false
+      - label: Additional VM Credits (on-demand)
+        name: extra-credits
+        type: metered
+        metric: credits
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.01486'
+        userMultiplied: false
+  - id: codesandbox-scale
+    name: Scale
+    type: paid
+    description: >-
+      Team plan supporting up to 20 members with 100 hours of monthly VM credits
+      included, 250 concurrent VMs, access to larger VM specs, and full
+      CodeSandbox SDK access.
+    entries:
+      - label: Monthly VM Hours Included
+        name: monthly-vm-hours
+        type: quota
+        metric: hours
+        limit: 100
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '119.00'
+        userMultiplied: false
+      - label: Team Members
+        name: team-members
+        type: quota
+        metric: seats
+        limit: 20
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: true
+      - label: Concurrent VMs
+        name: concurrent-vms
+        type: quota
+        metric: vms
+        limit: 250
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Additional VM Credits (on-demand)
+        name: extra-credits
+        type: metered
+        metric: credits
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.01486'
+        userMultiplied: false
+  - id: codesandbox-enterprise
+    name: Enterprise
+    type: enterprise
+    description: >-
+      Enterprise plan with custom VM credit allocations, dedicated support,
+      SSO integration, advanced security, and custom concurrent VM limits.
+      Pricing available on request.
+    entries:
+      - label: VM Credits
+        name: vm-credits
+        type: quota
+        metric: credits
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'custom'
+        userMultiplied: false

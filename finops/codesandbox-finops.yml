@@ -1,0 +1,78 @@
+---
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: CodeSandbox
+providerId: codesandbox
+created: '2026-06-12'
+modified: '2026-06-12'
+reconciled: true
+tags:
+  - FinOps
+  - FOCUS
+  - Developer Tools
+  - Cloud IDE
+description: FOCUS-aligned FinOps for CodeSandbox VM-based sandbox infrastructure billing.
+sources:
+  - https://codesandbox.io/pricing
+  - https://codesandbox.io/docs/sdk/pricing
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: CodeSandbox
+serviceCategory: Developer Tools
+billingModel:
+  pricingCategory: Subscription with on-demand overage
+  billingFrequency: Monthly
+  billingCurrency: USD
+focusColumns:
+  ServiceName: CodeSandbox
+  ServiceCategory: Developer Tools
+  ProviderName: CodeSandbox
+  PublisherName: CodeSandbox
+  BillingCurrency: USD
+meters:
+  - name: VM Credits
+    unit: credits
+    aggregation: sum
+  - name: VM Runtime Hours
+    unit: hours
+    aggregation: sum
+  - name: Concurrent VMs
+    unit: vms
+    aggregation: max
+skus:
+  - name: Nano VM (2 vCPU / 2 GiB RAM)
+    unit: hour
+    price: 0.15
+    currency: USD
+  - name: Small VM (4 vCPU / 8 GiB RAM)
+    unit: hour
+    price: 0.30
+    currency: USD
+  - name: On-demand credit
+    unit: credit
+    price: 0.01486
+    currency: USD
+principles:
+  - name: Visibility
+    description: >-
+      Track CodeSandbox VM credit consumption monthly per workspace to
+      understand development environment costs across teams and projects.
+  - name: Optimization
+    description: >-
+      Right-size VM specs to workload requirements; shut down idle sandboxes
+      promptly since billing rounds up to the nearest minute; prefer snapshot
+      and restore over leaving VMs running to minimize runtime costs.
+  - name: Accountability
+    description: >-
+      Assign workspace credits per team or project; use workspace-level
+      billing to attribute costs to individual teams or product lines.
+  - name: Forecasting
+    description: >-
+      Model monthly spend based on average VM hours per developer and
+      concurrent VM peaks; scale plan tier selection to expected usage to
+      avoid high on-demand overage rates.

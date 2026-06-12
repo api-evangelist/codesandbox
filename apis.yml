@@ -1,0 +1,119 @@
+---
+aid: codesandbox
+name: CodeSandbox
+description: >-
+  CodeSandbox is a browser-based development environment platform that enables
+  developers to create, share, and collaborate on interactive coding sandboxes
+  instantly in the browser. The platform provides a cloud-based IDE with
+  Firecracker microVM infrastructure that supports snapshotting, cloning, and
+  running isolated development environments at scale. CodeSandbox offers the
+  CodeSandbox SDK for programmatically spinning up AI sandboxes and development
+  environments, the Sandpack component toolkit for embedding live-running code
+  editing experiences, and a browser sandbox Define API for generating sandboxes
+  on the fly from code examples. Trusted by over 4.5 million developers monthly,
+  it serves individual developers, professional teams, and AI product builders
+  needing concurrent sandboxed environments.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Developer Tools
+  - Cloud IDE
+  - Code Sandboxes
+  - Browser Development
+  - AI Sandboxes
+  - Code Embedding
+url: https://raw.githubusercontent.com/api-evangelist/codesandbox/refs/heads/main/apis.yml
+created: '2026-06-12'
+modified: '2026-06-12'
+specificationVersion: '0.19'
+apis:
+  - aid: codesandbox:sdk
+    name: CodeSandbox SDK API
+    description: >-
+      The CodeSandbox SDK provides programmatic access to spin up isolated
+      Firecracker microVM-backed development environments and run untrusted code
+      securely. It supports VM snapshotting and cloning in under 2 seconds,
+      terminal and shell access, container support via Dockerfile, and Git/GitHub
+      integration. Authenticated via API key token obtained from
+      codesandbox.io/t/api and provided as CSB_API_KEY environment variable.
+    humanURL: https://codesandbox.io/docs/sdk
+    baseURL: https://api.codesandbox.io
+    tags:
+      - SDK
+      - Virtual Machines
+      - AI Sandboxes
+      - Code Execution
+    properties:
+      - type: Documentation
+        url: https://codesandbox.io/docs/sdk
+      - type: GitHubRepository
+        url: https://github.com/codesandbox/codesandbox-sdk
+  - aid: codesandbox:define-api
+    name: CodeSandbox Define API
+    description: >-
+      The Define API allows programmatic creation of browser sandboxes from code
+      files, useful for documentation sites and code examples that need to
+      generate a sandbox on the fly. Supports both GET and POST requests to
+      https://codesandbox.io/api/v1/sandboxes/define, accepting a files
+      parameter containing the sandbox file structure and returning either a
+      rendered sandbox or JSON with sandbox_id when using the ?json=1 query
+      parameter.
+    humanURL: https://codesandbox.io/docs/learn/browser-sandboxes/cli-api
+    baseURL: https://codesandbox.io/api/v1
+    tags:
+      - Browser Sandboxes
+      - REST API
+      - Code Examples
+    properties:
+      - type: Documentation
+        url: https://codesandbox.io/docs/learn/browser-sandboxes/cli-api
+  - aid: codesandbox:sandpack
+    name: Sandpack Embed Toolkit
+    description: >-
+      Sandpack is an open-source component toolkit for creating live-running code
+      editing experiences powered by CodeSandbox. It supports React via
+      @codesandbox/sandpack-react and plain JavaScript via
+      @codesandbox/sandpack-client, enabling developers to embed interactive code
+      editors and previews with built-in support for Next.js, Remix, Vite, Astro,
+      hot module reloading, and npm dependency support. Also supports iframe-based
+      sandbox embedding.
+    humanURL: https://sandpack.codesandbox.io/docs
+    tags:
+      - Embedding
+      - Code Editor
+      - React
+      - JavaScript
+      - Component Toolkit
+    properties:
+      - type: Documentation
+        url: https://sandpack.codesandbox.io/docs
+      - type: GitHubRepository
+        url: https://github.com/codesandbox/sandpack
+common:
+  - type: Website
+    url: https://codesandbox.io
+  - type: Documentation
+    url: https://codesandbox.io/docs/learn
+  - type: GitHubOrganization
+    url: https://github.com/codesandbox
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/codesandbox
+  - type: X
+    url: https://x.com/codesandbox
+  - type: Blog
+    url: https://codesandbox.io/blog
+  - type: Changelog
+    url: https://codesandbox.io/changelog
+  - type: Pricing
+    url: https://codesandbox.io/pricing
+  - type: StatusPage
+    url: https://status.codesandbox.io
+  - type: Plans
+    url: plans/codesandbox-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/codesandbox-rate-limits.yml
+  - type: FinOps
+    url: finops/codesandbox-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

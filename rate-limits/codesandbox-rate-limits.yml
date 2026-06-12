@@ -1,0 +1,60 @@
+---
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: CodeSandbox
+providerId: codesandbox
+created: '2026-06-12'
+modified: '2026-06-12'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Virtual Machines
+  - API Throttling
+description: >-
+  CodeSandbox enforces concurrent VM limits per plan tier and bills VM runtime
+  by the minute; exceeding credit allocations transitions to on-demand billing
+  at $0.01486 per credit rather than hard blocking.
+sources:
+  - https://codesandbox.io/pricing
+  - https://codesandbox.io/docs/sdk/pricing
+headers:
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+limits:
+  - name: Concurrent VMs - Free Plan
+    scope: org
+    metric: concurrent_vms
+    limit: 10
+    timeFrame: usage
+  - name: Concurrent VMs - Build Plan
+    scope: org
+    metric: concurrent_vms
+    limit: 10
+    timeFrame: usage
+  - name: Concurrent VMs - Scale Plan
+    scope: org
+    metric: concurrent_vms
+    limit: 250
+    timeFrame: usage
+  - name: Monthly VM Credits - Free Plan
+    scope: org
+    metric: credits_per_month
+    limit: 400
+    timeFrame: month
+  - name: Monthly VM Hours - Build Plan
+    scope: org
+    metric: hours_per_month
+    limit: 40
+    timeFrame: month
+  - name: Monthly VM Hours - Scale Plan
+    scope: org
+    metric: hours_per_month
+    limit: 100
+    timeFrame: month
+  - name: VM Billing Minimum Unit
+    scope: user
+    metric: minutes
+    limit: 1
+    timeFrame: usage
