@@ -1,0 +1,44 @@
+{
+  "description": "Example request and response for starting a CodeSandbox VM (devbox)",
+  "operation": "vm/start",
+  "request": {
+    "method": "POST",
+    "url": "https://api.codesandbox.io/vm/xq5yz/start",
+    "headers": {
+      "Authorization": "Bearer <your-api-token>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "tier": "Micro",
+      "hibernation_timeout_seconds": 300,
+      "ipcountry": "US",
+      "automatic_wakeup_config": {
+        "http": true,
+        "websocket": false
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "errors": [],
+      "data": {
+        "id": "xq5yz",
+        "cluster": "us-east",
+        "bootup_type": "snapshot",
+        "pitcher_url": "wss://pitcher.csb.dev/xq5yz",
+        "pitcher_token": "ptkn_abc123def456",
+        "pitcher_version": "2.4.1",
+        "pitcher_manager_version": "1.2.0",
+        "latest_pitcher_version": "2.4.1",
+        "reconnect_token": "rtkn_xyz789",
+        "workspace_path": "/workspace",
+        "user_workspace_path": "/workspace",
+        "use_pint": false,
+        "pint_url": null,
+        "pint_token": null
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.codesandbox.io/schemas/vm-start-response",
+  "title": "VMStartResponse",
+  "description": "Response from starting a CodeSandbox virtual machine (devbox).",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean",
+      "description": "Whether the request was successful"
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {"type": "string"},
+          {"type": "object", "additionalProperties": true}
+        ]
+      },
+      "description": "List of errors, if any"
+    },
+    "data": {
+      "type": "object",
+      "description": "VM start data",
+      "required": [
+        "bootup_type", "cluster", "id", "latest_pitcher_version",
+        "pitcher_manager_version", "pitcher_token", "pitcher_url",
+        "pitcher_version", "reconnect_token", "use_pint",
+        "user_workspace_path", "workspace_path"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The sandbox/VM ID"
+        },
+        "cluster": {
+          "type": "string",
+          "description": "The cluster where this VM is running (e.g., eu, us-east)"
+        },
+        "bootup_type": {
+          "type": "string",
+          "description": "How the VM was started (fresh, hibernated snapshot, etc.)"
+        },
+        "pitcher_url": {
+          "type": "string",
+          "description": "WebSocket URL to connect to the Pitcher agent inside the VM"
+        },
+        "pitcher_token": {
+          "type": "string",
+          "description": "Authentication token for connecting to Pitcher"
+        },
+        "pitcher_version": {
+          "type": "string",
+          "description": "Version of the Pitcher agent running in this VM"
+        },
+        "pitcher_manager_version": {
+          "type": "string",
+          "description": "Version of the Pitcher manager"
+        },
+        "latest_pitcher_version": {
+          "type": "string",
+          "description": "Latest available Pitcher version"
+        },
+        "reconnect_token": {
+          "type": "string",
+          "description": "Token to reconnect to the same VM session"
+        },
+        "workspace_path": {
+          "type": "string",
+          "description": "Path to the main workspace directory inside the VM"
+        },
+        "user_workspace_path": {
+          "type": "string",
+          "description": "Path to the user-specific workspace directory"
+        },
+        "use_pint": {
+          "type": "boolean",
+          "description": "Whether the sandbox uses the Pint bundler"
+        },
+        "pint_url": {
+          "type": "string",
+          "description": "URL for Pint (if use_pint is true)"
+        },
+        "pint_token": {
+          "type": "string",
+          "description": "Authentication token for Pint (if use_pint is true)"
+        }
+      }
+    }
+  }
+}

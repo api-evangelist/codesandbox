@@ -1,0 +1,50 @@
+{
+  "description": "Example request and response for creating a new CodeSandbox sandbox",
+  "operation": "sandbox/create",
+  "request": {
+    "method": "POST",
+    "url": "https://api.codesandbox.io/sandbox",
+    "headers": {
+      "Authorization": "Bearer <your-api-token>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "title": "My React App",
+      "description": "A simple React application with a counter",
+      "runtime": "browser",
+      "privacy": 0,
+      "tags": ["react", "demo"],
+      "template": "create-react-app",
+      "files": {
+        "src/index.js": {
+          "code": "import React from 'react';\nimport ReactDOM from 'react-dom';\nimport App from './App';\n\nReactDOM.render(<App />, document.getElementById('root'));\n",
+          "is_binary": false
+        },
+        "src/App.js": {
+          "code": "import React, { useState } from 'react';\n\nexport default function App() {\n  const [count, setCount] = useState(0);\n  return (\n    <div>\n      <h1>Counter: {count}</h1>\n      <button onClick={() => setCount(c => c + 1)}>Increment</button>\n    </div>\n  );\n}\n",
+          "is_binary": false
+        },
+        "package.json": {
+          "code": "{\"name\":\"my-react-app\",\"version\":\"1.0.0\",\"dependencies\":{\"react\":\"^18.0.0\",\"react-dom\":\"^18.0.0\"}}\n",
+          "is_binary": false
+        }
+      },
+      "npm_dependencies": {
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0"
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "success": true,
+      "errors": [],
+      "data": {
+        "id": "xq5yz",
+        "alias": "my-react-app-xq5yz",
+        "title": "My React App"
+      }
+    }
+  }
+}

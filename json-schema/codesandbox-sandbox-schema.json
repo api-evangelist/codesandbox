@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.codesandbox.io/schemas/sandbox",
+  "title": "Sandbox",
+  "description": "A CodeSandbox sandbox or devbox backed by a Firecracker microVM.",
+  "type": "object",
+  "required": ["id", "privacy", "is_frozen", "created_at", "updated_at", "tags", "settings"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Short ID of the sandbox",
+      "example": "1ab3c"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the sandbox was created"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the sandbox was last updated"
+    },
+    "is_frozen": {
+      "type": "boolean",
+      "description": "When true, edits to the sandbox are restricted"
+    },
+    "privacy": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2,
+      "description": "Privacy level: 0 = public, 1 = unlisted, 2 = private"
+    },
+    "title": {
+      "type": ["string", "null"],
+      "maxLength": 255,
+      "description": "Sandbox title"
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Text description of the sandbox"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of tags applied to this sandbox"
+    },
+    "settings": {
+      "type": "object",
+      "description": "Sandbox settings",
+      "properties": {
+        "use_pint": {
+          "type": "boolean",
+          "description": "Whether Pint (the new bundler) is used for this sandbox"
+        }
+      }
+    }
+  }
+}

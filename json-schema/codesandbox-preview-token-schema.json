@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.codesandbox.io/schemas/preview-token",
+  "title": "PreviewToken",
+  "description": "A preview token that grants access to a private CodeSandbox sandbox preview.",
+  "type": "object",
+  "required": ["expires_at", "last_used_at", "token_id", "token_prefix"],
+  "properties": {
+    "token_id": {
+      "type": "string",
+      "description": "Unique identifier for this preview token",
+      "example": "prv_abcd12345"
+    },
+    "token_prefix": {
+      "type": "string",
+      "description": "A prefix of the token value (safe to display)"
+    },
+    "expires_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "UTC timestamp when this token expires. Null if the token never expires."
+    },
+    "last_used_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "UTC timestamp of when this token was last used. Null if never used."
+    }
+  }
+}

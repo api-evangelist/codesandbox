@@ -1,0 +1,109 @@
+vocabulary:
+  name: CodeSandbox API Vocabulary
+  description: >-
+    Core terms and concepts used across the CodeSandbox API, covering
+    sandbox management, virtual machine lifecycle, session isolation,
+    templates, preview access control, and workspace configuration.
+  version: "2023-07-01"
+  source: https://raw.githubusercontent.com/codesandbox/codesandbox-sdk/main/openapi.json
+  terms:
+    - term: sandbox
+      description: >-
+        A browser-based or VM-backed isolated development environment. Each
+        sandbox has a short alphanumeric ID and can contain files, dependencies,
+        and settings. Can be of runtime "browser" (client-side only) or "vm"
+        (Firecracker microVM).
+    - term: devbox
+      description: >-
+        Synonym for a VM-backed sandbox running on a Firecracker microVM.
+        Provides full Linux environment with persistent filesystem, terminal
+        access, and Pitcher agent connectivity.
+    - term: vm
+      description: >-
+        A Firecracker microVM instance associated with a sandbox. Can be
+        started, hibernated, shut down, and deleted. Supports snapshotting for
+        sub-2-second cold start times.
+    - term: session
+      description: >-
+        An isolated Linux user context within a running VM. Each session gets
+        its own container user, workspace path, and single-use Pitcher token.
+        Sessions can be read-only or read-write.
+    - term: pitcher
+      description: >-
+        The agent process running inside a CodeSandbox VM. Exposes a WebSocket
+        API for terminal commands, filesystem access, and git operations.
+        Identified by pitcher_url and authenticated via pitcher_token.
+    - term: pitcher_token
+      description: >-
+        A short-lived authentication token used to connect to the Pitcher agent
+        inside a running VM. Returned by vm/start and vm/create_session.
+    - term: reconnect_token
+      description: >-
+        A token returned alongside pitcher_token that allows reconnecting to
+        the same VM session after a disconnection without needing to re-start
+        the VM.
+    - term: template
+      description: >-
+        A set of sandboxes tagged together as a reusable starting point. Created
+        by forking an existing sandbox. Templates appear in the CodeSandbox
+        template gallery.
+    - term: preview_token
+      description: >-
+        A scoped token that grants access to the preview URL of a private sandbox.
+        Has an optional expiry time. Can be revoked individually or in bulk.
+    - term: preview_host
+      description: >-
+        A trusted domain allowed to embed or access sandbox previews for a
+        given workspace. Prevents unauthorized iframe embedding.
+    - term: workspace
+      description: >-
+        A team workspace within a CodeSandbox organization. Contains sandboxes,
+        API tokens, and billing/usage settings.
+    - term: tier
+      description: >-
+        A VM hardware specification level. Available tiers include Pico, Nano,
+        Micro, Small, Medium, Large, and XLarge, each providing different
+        amounts of CPU, memory, and storage.
+    - term: hibernation
+      description: >-
+        A power-saving state where the VM's memory and processes are snapshotted
+        to disk. The VM can be resumed from hibernation with near-instant startup.
+        Automatic hibernation timeout is configurable (1–86400 seconds).
+    - term: tag
+      description: >-
+        A string label applied to a sandbox or VM for filtering and organization.
+        Also used in the template system to group related sandboxes.
+    - term: tag_alias
+      description: >-
+        A human-readable pointer to a specific VM tag within a namespace (e.g.,
+        namespace="my-project", alias="latest"). Used for rolling updates to
+        sandbox templates.
+    - term: cluster
+      description: >-
+        A geographic deployment region for VMs (e.g., "eu", "us-east").
+        Selectable at VM start time via the ipcountry parameter using
+        ISO-3166-1 alpha-2 country codes.
+    - term: pint
+      description: >-
+        CodeSandbox's next-generation bundler for browser sandboxes. Enabled
+        per-sandbox via the settings.use_pint flag. Provides faster hot module
+        reloading and improved dependency support.
+    - term: api_token
+      description: >-
+        A Bearer token used to authenticate API requests. Created per workspace
+        with specific scopes (sandbox:read, sandbox:create, sandbox:edit_code,
+        vm:manage, etc.) and optional expiry dates.
+    - term: scope
+      description: >-
+        A permission granted to an API token. Available scopes include
+        sandbox_read, sandbox_create, sandbox_edit_code, and vm_manage.
+        Tokens can only perform actions covered by their granted scopes.
+    - term: bootup_type
+      description: >-
+        Describes how a VM was started: from a fresh image, from a hibernation
+        snapshot, or from a template snapshot. Affects startup latency.
+    - term: private_preview
+      description: >-
+        A flag on private sandboxes that controls whether the preview URL is
+        publicly accessible (false) or also restricted (true). Has no effect
+        on public or unlisted sandboxes.

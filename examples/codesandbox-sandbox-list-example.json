@@ -1,0 +1,53 @@
+{
+  "description": "Example request and response for listing sandboxes in a workspace",
+  "operation": "sandbox/list",
+  "request": {
+    "method": "GET",
+    "url": "https://api.codesandbox.io/sandbox?page=1&page_size=10&order_by=updated_at&direction=desc",
+    "headers": {
+      "Authorization": "Bearer <your-api-token>"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "errors": [],
+      "data": {
+        "sandboxes": [
+          {
+            "id": "xq5yz",
+            "created_at": "2024-01-15T10:30:00Z",
+            "updated_at": "2024-01-20T14:22:00Z",
+            "is_frozen": false,
+            "privacy": 0,
+            "title": "My React App",
+            "description": "A simple React application with a counter",
+            "tags": ["react", "demo"],
+            "settings": {
+              "use_pint": false
+            }
+          },
+          {
+            "id": "abc12",
+            "created_at": "2024-01-10T08:00:00Z",
+            "updated_at": "2024-01-18T09:45:00Z",
+            "is_frozen": false,
+            "privacy": 2,
+            "title": "AI Agent Sandbox",
+            "description": "Isolated environment for running AI code",
+            "tags": ["ai", "agent", "python"],
+            "settings": {
+              "use_pint": false
+            }
+          }
+        ],
+        "pagination": {
+          "total_records": 2,
+          "current_page": 1,
+          "next_page": null
+        }
+      }
+    }
+  }
+}

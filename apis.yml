@@ -25,6 +25,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/codesandbox/refs/heads/main/apis.yml
 created: '2026-06-12'
 modified: '2026-06-12'
+
 specificationVersion: '0.19'
 apis:
   - aid: codesandbox:sdk
@@ -48,6 +49,20 @@ apis:
         url: https://codesandbox.io/docs/sdk
       - type: GitHubRepository
         url: https://github.com/codesandbox/codesandbox-sdk
+      - type: OpenAPI
+        url: openapi/codesandbox-sdk-openapi.yml
+      - type: JSONSchema
+        url: json-schema/codesandbox-sandbox-schema.json
+      - type: JSONSchema
+        url: json-schema/codesandbox-vm-start-response-schema.json
+      - type: JSONSchema
+        url: json-schema/codesandbox-preview-token-schema.json
+      - type: JSONSchema
+        url: json-schema/codesandbox-meta-information-schema.json
+      - type: Vocabulary
+        url: vocabulary/codesandbox-vocabulary.yml
+      - type: JSONLDContext
+        url: json-ld/codesandbox-context.jsonld
   - aid: codesandbox:define-api
     name: CodeSandbox Define API
     description: >-

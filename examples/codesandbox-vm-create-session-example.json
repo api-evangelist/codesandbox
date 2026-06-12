@@ -1,0 +1,37 @@
+{
+  "description": "Example request and response for creating an isolated session on a running VM",
+  "operation": "vm/create_session",
+  "request": {
+    "method": "POST",
+    "url": "https://api.codesandbox.io/vm/xq5yz/sessions",
+    "headers": {
+      "Authorization": "Bearer <your-api-token>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "session_id": "user-session-001",
+      "permission": "write",
+      "git_user_name": "Jane Dev",
+      "git_user_email": "jane@example.com",
+      "git_access_token": "ghp_xxxxxxxxxxxx"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "errors": [],
+      "data": {
+        "username": "csb_user_session_001",
+        "pitcher_token": "session_ptkn_abc123",
+        "pitcher_url": "wss://pitcher.csb.dev/xq5yz",
+        "user_workspace_path": "/home/csb_user_session_001/workspace",
+        "capabilities": ["shell", "filesystem", "git"],
+        "permissions": {
+          "write": true,
+          "read": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.codesandbox.io/schemas/meta-information",
+  "title": "MetaInformation",
+  "description": "Metadata about the CodeSandbox API, current auth context, and rate limits.",
+  "type": "object",
+  "required": ["api"],
+  "properties": {
+    "api": {
+      "type": "object",
+      "description": "Meta information about the CodeSandbox API",
+      "required": ["name", "latest_version"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "API name"
+        },
+        "latest_version": {
+          "type": "string",
+          "description": "Latest API version (date format YYYY-MM-DD)"
+        }
+      }
+    },
+    "auth": {
+      "type": "object",
+      "description": "Meta information about the current authentication context",
+      "required": ["scopes", "team", "version"],
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "List of permission scopes granted to this API token"
+        },
+        "team": {
+          "type": ["string", "null"],
+          "format": "uuid",
+          "description": "UUID of the authenticated team/workspace"
+        },
+        "version": {
+          "type": "string",
+          "description": "API version being used"
+        }
+      }
+    },
+    "rate_limits": {
+      "type": "object",
+      "description": "Current workspace rate limits",
+      "required": ["concurrent_vms", "sandboxes_hourly", "requests_hourly"],
+      "properties": {
+        "concurrent_vms": {
+          "type": "object",
+          "description": "Concurrent VM rate limit information",
+          "properties": {
+            "limit": {"type": "integer"},
+            "remaining": {"type": "integer"}
+          }
+        },
+        "sandboxes_hourly": {
+          "type": "object",
+          "description": "Hourly sandbox creation rate limit",
+          "properties": {
+            "limit": {"type": "integer"},
+            "remaining": {"type": "integer"},
+            "reset": {"type": "integer", "description": "Unix timestamp when the limit resets"}
+          }
+        },
+        "requests_hourly": {
+          "type": "object",
+          "description": "Hourly API request rate limit",
+          "properties": {
+            "limit": {"type": "integer"},
+            "remaining": {"type": "integer"},
+            "reset": {"type": "integer", "description": "Unix timestamp when the limit resets"}
+          }
+        }
+      }
+    }
+  }
+}

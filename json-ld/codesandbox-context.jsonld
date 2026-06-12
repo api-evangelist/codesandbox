@@ -1,0 +1,203 @@
+{
+  "@context": {
+    "@vocab": "https://api.codesandbox.io/vocab#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Sandbox": {
+      "@id": "https://api.codesandbox.io/vocab#Sandbox",
+      "@type": "@id",
+      "description": "A browser or VM-backed isolated development environment on CodeSandbox"
+    },
+    "VirtualMachine": {
+      "@id": "https://api.codesandbox.io/vocab#VirtualMachine",
+      "@type": "@id",
+      "description": "A Firecracker microVM instance backing a devbox"
+    },
+    "Session": {
+      "@id": "https://api.codesandbox.io/vocab#Session",
+      "@type": "@id",
+      "description": "An isolated Linux user context within a running VM"
+    },
+    "Template": {
+      "@id": "https://api.codesandbox.io/vocab#Template",
+      "@type": "@id",
+      "description": "A reusable set of tagged sandboxes for project bootstrapping"
+    },
+    "PreviewToken": {
+      "@id": "https://api.codesandbox.io/vocab#PreviewToken",
+      "@type": "@id",
+      "description": "A scoped access token for a private sandbox preview URL"
+    },
+    "Workspace": {
+      "@id": "https://api.codesandbox.io/vocab#Workspace",
+      "@type": "@id",
+      "description": "A team workspace containing sandboxes and API tokens"
+    },
+    "ApiToken": {
+      "@id": "https://api.codesandbox.io/vocab#ApiToken",
+      "@type": "@id",
+      "description": "A Bearer token for authenticating CodeSandbox API requests"
+    },
+
+    "id": {
+      "@id": "schema:identifier",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "tags": {
+      "@id": "schema:keywords",
+      "@container": "@set"
+    },
+    "privacy": {
+      "@id": "https://api.codesandbox.io/vocab#privacy",
+      "@type": "xsd:integer",
+      "description": "0=public, 1=unlisted, 2=private"
+    },
+    "is_frozen": {
+      "@id": "https://api.codesandbox.io/vocab#isFrozen",
+      "@type": "xsd:boolean"
+    },
+    "runtime": {
+      "@id": "https://api.codesandbox.io/vocab#runtime",
+      "@type": "xsd:string",
+      "description": "browser or vm"
+    },
+    "tier": {
+      "@id": "https://api.codesandbox.io/vocab#tier",
+      "@type": "xsd:string",
+      "description": "VM hardware tier: Pico, Nano, Micro, Small, Medium, Large, XLarge"
+    },
+    "cluster": {
+      "@id": "https://api.codesandbox.io/vocab#cluster",
+      "@type": "xsd:string",
+      "description": "Geographic deployment region"
+    },
+    "pitcher_url": {
+      "@id": "https://api.codesandbox.io/vocab#pitcherUrl",
+      "@type": "xsd:anyURI",
+      "description": "WebSocket URL to connect to the Pitcher agent"
+    },
+    "pitcher_token": {
+      "@id": "https://api.codesandbox.io/vocab#pitcherToken",
+      "@type": "xsd:string"
+    },
+    "reconnect_token": {
+      "@id": "https://api.codesandbox.io/vocab#reconnectToken",
+      "@type": "xsd:string"
+    },
+    "workspace_path": {
+      "@id": "https://api.codesandbox.io/vocab#workspacePath",
+      "@type": "xsd:string"
+    },
+    "user_workspace_path": {
+      "@id": "https://api.codesandbox.io/vocab#userWorkspacePath",
+      "@type": "xsd:string"
+    },
+    "bootup_type": {
+      "@id": "https://api.codesandbox.io/vocab#bootupType",
+      "@type": "xsd:string"
+    },
+    "hibernation_timeout_seconds": {
+      "@id": "https://api.codesandbox.io/vocab#hibernationTimeoutSeconds",
+      "@type": "xsd:integer"
+    },
+    "use_pint": {
+      "@id": "https://api.codesandbox.io/vocab#usePint",
+      "@type": "xsd:boolean"
+    },
+    "scopes": {
+      "@id": "https://api.codesandbox.io/vocab#scopes",
+      "@container": "@set"
+    },
+    "expires_at": {
+      "@id": "schema:expires",
+      "@type": "xsd:dateTime"
+    },
+    "token_id": {
+      "@id": "https://api.codesandbox.io/vocab#tokenId",
+      "@type": "xsd:string"
+    },
+    "sandbox_id": {
+      "@id": "https://api.codesandbox.io/vocab#sandboxId",
+      "@type": "xsd:string"
+    },
+    "team_id": {
+      "@id": "https://api.codesandbox.io/vocab#teamId",
+      "@type": "xsd:string"
+    },
+    "session_id": {
+      "@id": "https://api.codesandbox.io/vocab#sessionId",
+      "@type": "xsd:string"
+    },
+    "permission": {
+      "@id": "https://api.codesandbox.io/vocab#permission",
+      "@type": "xsd:string",
+      "description": "read or write"
+    },
+    "success": {
+      "@id": "https://api.codesandbox.io/vocab#success",
+      "@type": "xsd:boolean"
+    },
+    "errors": {
+      "@id": "https://api.codesandbox.io/vocab#errors",
+      "@container": "@set"
+    },
+    "data": {
+      "@id": "https://api.codesandbox.io/vocab#data"
+    },
+    "files": {
+      "@id": "https://api.codesandbox.io/vocab#files"
+    },
+    "npm_dependencies": {
+      "@id": "https://api.codesandbox.io/vocab#npmDependencies"
+    },
+    "forkOf": {
+      "@id": "schema:isBasedOn",
+      "@type": "xsd:string"
+    },
+    "tag_id": {
+      "@id": "https://api.codesandbox.io/vocab#tagId",
+      "@type": "xsd:string"
+    },
+    "tag_alias_id": {
+      "@id": "https://api.codesandbox.io/vocab#tagAliasId",
+      "@type": "xsd:string"
+    },
+    "namespace": {
+      "@id": "https://api.codesandbox.io/vocab#namespace",
+      "@type": "xsd:string"
+    },
+    "alias": {
+      "@id": "https://api.codesandbox.io/vocab#alias",
+      "@type": "xsd:string"
+    },
+    "host": {
+      "@id": "schema:url",
+      "@type": "xsd:anyURI"
+    },
+    "concurrent_vm_count": {
+      "@id": "https://api.codesandbox.io/vocab#concurrentVmCount",
+      "@type": "xsd:integer"
+    },
+    "concurrent_vm_limit": {
+      "@id": "https://api.codesandbox.io/vocab#concurrentVmLimit",
+      "@type": "xsd:integer"
+    }
+  }
+}
