@@ -117,7 +117,7 @@ common:
     url: https://x.com/codesandbox
   - type: Blog
     url: https://codesandbox.io/blog
-  - type: Changelog
+  - type: ChangeLog
     url: https://codesandbox.io/changelog
   - type: Pricing
     url: https://codesandbox.io/pricing
