@@ -105,6 +105,10 @@ apis:
       - type: GitHubRepository
         url: https://github.com/codesandbox/sandpack
 common:
+  - type: DomainSecurity
+    url: security/codesandbox-domain-security.yml
+  - type: Authentication
+    url: authentication/codesandbox-authentication.yml
   - type: Website
     url: https://codesandbox.io
   - type: Documentation
