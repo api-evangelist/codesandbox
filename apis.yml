@@ -105,6 +105,8 @@ apis:
       - type: GitHubRepository
         url: https://github.com/codesandbox/sandpack
 common:
+  - type: AgenticAccess
+    url: agentic-access/codesandbox-agentic-access.yml
   - type: DomainSecurity
     url: security/codesandbox-domain-security.yml
   - type: Authentication
