@@ -1,0 +1,105 @@
+openapi: 3.0.0
+info:
+  title: CodeSandbox meta API
+  version: '2023-07-01'
+  description: The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.
+  contact:
+    url: https://codesandbox.io/docs/sdk
+  x-source: https://raw.githubusercontent.com/codesandbox/codesandbox-sdk/main/openapi.json
+servers:
+- url: https://api.codesandbox.io
+security: []
+tags:
+- name: meta
+  description: API metadata and auth context
+paths:
+  /meta/info:
+    get:
+      operationId: meta/info
+      summary: Metadata about the API
+      tags:
+      - meta
+      parameters: []
+      responses:
+        '200':
+          description: Meta Info Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetaInformation'
+      security:
+      - {}
+components:
+  schemas:
+    MetaInformation:
+      title: MetaInformation
+      type: object
+      required:
+      - api
+      properties:
+        api:
+          type: object
+          description: Meta information about the CodeSandbox API
+          required:
+          - name
+          - latest_version
+          properties:
+            name:
+              type: string
+            latest_version:
+              type: string
+        auth:
+          type: object
+          description: Meta information about the current authentication context
+          required:
+          - scopes
+          - team
+          - version
+          properties:
+            scopes:
+              type: array
+              items:
+                type: string
+            team:
+              type: string
+              format: uuid
+              nullable: true
+            version:
+              type: string
+        rate_limits:
+          type: object
+          description: Current workspace rate limits
+          required:
+          - concurrent_vms
+          - sandboxes_hourly
+          - requests_hourly
+          properties:
+            concurrent_vms:
+              type: object
+              properties:
+                limit:
+                  type: integer
+                remaining:
+                  type: integer
+            sandboxes_hourly:
+              type: object
+              properties:
+                limit:
+                  type: integer
+                remaining:
+                  type: integer
+                reset:
+                  type: integer
+            requests_hourly:
+              type: object
+              properties:
+                limit:
+                  type: integer
+                remaining:
+                  type: integer
+                reset:
+                  type: integer
+  securitySchemes:
+    authorization:
+      type: http
+      scheme: bearer

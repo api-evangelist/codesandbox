@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  title: CodeSandbox meta workspace API
+  version: '2023-07-01'
+  description: The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.
+  contact:
+    url: https://codesandbox.io/docs/sdk
+  x-source: https://raw.githubusercontent.com/codesandbox/codesandbox-sdk/main/openapi.json
+servers:
+- url: https://api.codesandbox.io
+security: []
+tags:
+- name: workspace
+  description: Workspace and organization management
+paths:
+  /org/workspace:
+    post:
+      operationId: workspace/create
+      summary: Create a Workspace
+      description: 'Create a new, empty, workspace in the current organization
+
+        '
+      tags:
+      - workspace
+      parameters: []
+      requestBody:
+        description: Workspace Create Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkspaceCreateRequest'
+      responses:
+        '201':
+          description: Workspace Create Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceCreateResponse'
+      security:
+      - authorization:
+        - workspace:create
+components:
+  schemas:
+    Response:
+      title: Response
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      title: Error
+      oneOf:
+      - type: string
+      - type: object
+        additionalProperties: true
+    WorkspaceCreateRequest:
+      title: WorkspaceCreateRequest
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          maxLength: 64
+          description: Name for the new workspace. Maximum length 64 characters.
+    WorkspaceCreateResponse:
+      title: WorkspaceCreateResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - id
+            - name
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+  securitySchemes:
+    authorization:
+      type: http
+      scheme: bearer

@@ -1,0 +1,115 @@
+openapi: 3.0.0
+info:
+  title: CodeSandbox meta templates API
+  version: '2023-07-01'
+  description: The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.
+  contact:
+    url: https://codesandbox.io/docs/sdk
+  x-source: https://raw.githubusercontent.com/codesandbox/codesandbox-sdk/main/openapi.json
+servers:
+- url: https://api.codesandbox.io
+security: []
+tags:
+- name: templates
+  description: Sandbox template management
+paths:
+  /templates:
+    post:
+      operationId: templates/create
+      summary: Create a template
+      description: 'Create a new template in the current workspace (creates 3 sandboxes and tags them)
+
+        '
+      tags:
+      - templates
+      parameters: []
+      requestBody:
+        description: Template Create Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateCreateRequest'
+      responses:
+        '201':
+          description: Template Create Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateCreateResponse'
+      security:
+      - authorization:
+        - template:create
+components:
+  schemas:
+    TemplateCreateRequest:
+      title: TemplateCreateRequest
+      type: object
+      required:
+      - forkOf
+      properties:
+        forkOf:
+          type: string
+          example: pt_1234567890
+          description: Short ID of the sandbox to fork.
+        title:
+          type: string
+          maxLength: 255
+          description: Template title. Maximum 255 characters.
+        description:
+          type: string
+          maxLength: 255
+          description: Template description. Maximum 255 characters.
+        tags:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Tags to set on the new sandbox.
+    Response:
+      title: Response
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      title: Error
+      oneOf:
+      - type: string
+      - type: object
+        additionalProperties: true
+    TemplateCreateResponse:
+      title: TemplateCreateResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - tag
+            - sandboxes
+            properties:
+              tag:
+                type: string
+              sandboxes:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - id
+                  - cluster
+                  properties:
+                    id:
+                      type: string
+                    cluster:
+                      type: string
+  securitySchemes:
+    authorization:
+      type: http
+      scheme: bearer

@@ -1,0 +1,227 @@
+openapi: 3.0.0
+info:
+  title: CodeSandbox meta token API
+  version: '2023-07-01'
+  description: The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.
+  contact:
+    url: https://codesandbox.io/docs/sdk
+  x-source: https://raw.githubusercontent.com/codesandbox/codesandbox-sdk/main/openapi.json
+servers:
+- url: https://api.codesandbox.io
+security: []
+tags:
+- name: token
+  description: API token management
+paths:
+  /org/workspace/{team_id}/tokens:
+    post:
+      operationId: token/create
+      summary: Create an API Token
+      description: 'Create a new API token for a workspace that is part of the current organization.
+
+        '
+      tags:
+      - token
+      parameters:
+      - name: team_id
+        in: path
+        required: true
+        description: ID of the workspace to create the token in
+        example: ws_123abcdef
+        schema:
+          type: string
+      requestBody:
+        description: Token Create Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenCreateRequest'
+      responses:
+        '201':
+          description: Token Create Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenCreateResponse'
+      security:
+      - authorization:
+        - token:manage
+  /org/workspace/{team_id}/tokens/{token_id}:
+    patch:
+      operationId: token/update
+      summary: Update an API Token
+      description: 'Update an API token for a workspace that is part of the current organization.
+
+        '
+      tags:
+      - token
+      parameters:
+      - name: team_id
+        in: path
+        required: true
+        description: ID of the workspace the token belongs to
+        example: ws_123abcdef
+        schema:
+          type: string
+      - name: token_id
+        in: path
+        required: true
+        description: ID of token to update
+        example: tok_123abcdef
+        schema:
+          type: string
+      requestBody:
+        description: Token Update Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenUpdateRequest'
+      responses:
+        '201':
+          description: Token Update Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenUpdateResponse'
+      security:
+      - authorization:
+        - token:manage
+components:
+  schemas:
+    Response:
+      title: Response
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    TokenCreateRequest:
+      title: TokenCreateRequest
+      type: object
+      properties:
+        description:
+          type: string
+          maxLength: 255
+          description: Description of this token.
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: UTC Timestamp until when this token is valid.
+        scopes:
+          type: array
+          items:
+            enum:
+            - sandbox_create
+            - sandbox_edit_code
+            - sandbox_read
+            - vm_manage
+          description: Which scopes to grant this token.
+        default_version:
+          type: string
+          format: date
+          nullable: true
+          description: API Version to use, formatted as YYYY-MM-DD.
+    TokenCreateResponse:
+      title: TokenCreateResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - description
+            - expires_at
+            - scopes
+            - team_id
+            - token
+            - token_id
+            properties:
+              token_id:
+                type: string
+              team_id:
+                type: string
+              token:
+                type: string
+              description:
+                type: string
+                nullable: true
+              scopes:
+                type: array
+                items:
+                  type: string
+              expires_at:
+                type: string
+                nullable: true
+    TokenUpdateRequest:
+      title: TokenUpdateRequest
+      description: Updateable fields for API Tokens.
+      type: object
+      properties:
+        description:
+          type: string
+          maxLength: 255
+          nullable: true
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        scopes:
+          type: array
+          items:
+            enum:
+            - sandbox_create
+            - sandbox_edit_code
+            - sandbox_read
+            - vm_manage
+        default_version:
+          type: string
+          format: date
+          nullable: true
+    TokenUpdateResponse:
+      title: TokenUpdateResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - description
+            - scopes
+            - team_id
+            - token_id
+            properties:
+              token_id:
+                type: string
+              team_id:
+                type: string
+              description:
+                type: string
+                nullable: true
+              scopes:
+                type: array
+                items:
+                  type: string
+              expires_at:
+                type: string
+                format: date-time
+                nullable: true
+    Error:
+      title: Error
+      oneOf:
+      - type: string
+      - type: object
+        additionalProperties: true
+  securitySchemes:
+    authorization:
+      type: http
+      scheme: bearer

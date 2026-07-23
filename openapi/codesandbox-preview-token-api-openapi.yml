@@ -1,0 +1,271 @@
+openapi: 3.0.0
+info:
+  title: CodeSandbox meta preview_token API
+  version: '2023-07-01'
+  description: The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.
+  contact:
+    url: https://codesandbox.io/docs/sdk
+  x-source: https://raw.githubusercontent.com/codesandbox/codesandbox-sdk/main/openapi.json
+servers:
+- url: https://api.codesandbox.io
+security: []
+tags:
+- name: preview_token
+  description: Preview token management for private sandboxes
+paths:
+  /sandbox/{id}/tokens:
+    get:
+      operationId: preview_token/list
+      summary: List Preview Tokens
+      description: 'List information about the preview tokens associated with the current sandbox
+
+        '
+      tags:
+      - preview_token
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Shortid of the sandbox to list the tokens for
+        example: 1ab3c
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Token List Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreviewTokenListResponse'
+      security:
+      - authorization:
+        - preview_token:manage
+    post:
+      operationId: preview_token/create
+      summary: Create a Preview Token
+      description: 'Create a new Preview token that allow access to a private sandbox
+
+        '
+      tags:
+      - preview_token
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Shortid of the sandbox to create the token for
+        example: 1ab3c
+        schema:
+          type: string
+      requestBody:
+        description: Token Create Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreviewTokenCreateRequest'
+      responses:
+        '201':
+          description: Token Create Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreviewTokenCreateResponse'
+      security:
+      - authorization:
+        - preview_token:manage
+    delete:
+      operationId: preview_token/revoke_all
+      summary: Revoke preview tokens
+      description: 'Immediately expires all active preview tokens associated with this sandbox
+
+        '
+      tags:
+      - preview_token
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Shortid of the sandbox to revoke tokens for
+        example: 1ab3c
+        schema:
+          type: string
+      responses:
+        '200':
+          description: RevokeAllPreviewTokensResponse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreviewTokenRevokeAllResponse'
+      security:
+      - authorization:
+        - preview_token:manage
+  /sandbox/{id}/tokens/{token_id}:
+    patch:
+      operationId: preview_token/update
+      summary: Update a Preview Token
+      description: 'Update a Preview token that allow access to a private sandbox
+
+        '
+      tags:
+      - preview_token
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Shortid of the sandbox to create the token for
+        example: 1ab3c
+        schema:
+          type: string
+      - name: token_id
+        in: path
+        required: true
+        description: ID of the token to update. Does not accept the token itself.
+        example: prv_abcd12345
+        schema:
+          type: string
+      requestBody:
+        description: Token Update Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreviewTokenUpdateRequest'
+      responses:
+        '201':
+          description: Token Update Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreviewTokenUpdateResponse'
+      security:
+      - authorization:
+        - preview_token:manage
+components:
+  schemas:
+    PreviewTokenUpdateRequest:
+      title: PreviewTokenUpdateRequest
+      type: object
+      properties:
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: UTC Timestamp until when this token is valid.
+    Response:
+      title: Response
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    PreviewTokenListResponse:
+      title: PreviewTokenListResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - tokens
+            - sandbox_id
+            properties:
+              sandbox_id:
+                type: string
+              tokens:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PreviewToken'
+    PreviewTokenCreateRequest:
+      title: PreviewTokenCreateRequest
+      type: object
+      properties:
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: UTC Timestamp until when this token is valid. Omitting this field will create a token without an expiry.
+    PreviewTokenUpdateResponse:
+      title: PreviewTokenUpdateResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - sandbox_id
+            - token
+            properties:
+              sandbox_id:
+                type: string
+              token:
+                $ref: '#/components/schemas/PreviewToken'
+    PreviewTokenCreateResponse:
+      title: PreviewTokenCreateResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - sandbox_id
+            - token
+            properties:
+              sandbox_id:
+                type: string
+              token:
+                allOf:
+                - $ref: '#/components/schemas/PreviewToken'
+                - type: object
+                  required:
+                  - token
+                  properties:
+                    token:
+                      type: string
+    Error:
+      title: Error
+      oneOf:
+      - type: string
+      - type: object
+        additionalProperties: true
+    PreviewToken:
+      title: PreviewToken
+      type: object
+      required:
+      - expires_at
+      - last_used_at
+      - token_id
+      - token_prefix
+      properties:
+        token_id:
+          type: string
+        token_prefix:
+          type: string
+        expires_at:
+          type: string
+          nullable: true
+        last_used_at:
+          type: string
+          nullable: true
+    PreviewTokenRevokeAllResponse:
+      title: PreviewTokenRevokeAllResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties: {}
+  securitySchemes:
+    authorization:
+      type: http
+      scheme: bearer

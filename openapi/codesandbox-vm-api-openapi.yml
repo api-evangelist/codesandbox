@@ -1,0 +1,825 @@
+openapi: 3.0.0
+info:
+  title: CodeSandbox meta vm API
+  version: '2023-07-01'
+  description: The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.
+  contact:
+    url: https://codesandbox.io/docs/sdk
+  x-source: https://raw.githubusercontent.com/codesandbox/codesandbox-sdk/main/openapi.json
+servers:
+- url: https://api.codesandbox.io
+security: []
+tags:
+- name: vm
+  description: Virtual machine lifecycle management
+paths:
+  /vm/alias/{namespace}/{alias}:
+    put:
+      operationId: vm/assign_tag_alias
+      summary: Assign a tag alias to a VM tag
+      description: 'Assign a tag alias to a VM tag.
+
+        '
+      tags:
+      - vm
+      parameters:
+      - name: namespace
+        in: path
+        required: true
+        description: Tag alias namespace
+        example: my-project
+        schema:
+          type: string
+      - name: alias
+        in: path
+        required: true
+        description: Tag alias
+        example: latest
+        schema:
+          type: string
+      requestBody:
+        description: VM Assign Tag Alias Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VMAssignTagAliasRequest'
+      responses:
+        '200':
+          description: VM Assign Tag Alias Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VMAssignTagAliasResponse'
+      security:
+      - authorization:
+        - vm:manage
+  /vm/clusters:
+    get:
+      operationId: vm/list_clusters
+      summary: List all available clusters
+      description: 'List all available clusters.
+
+        '
+      tags:
+      - vm
+      parameters: []
+      responses:
+        '200':
+          description: VM List Clusters Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VMListClustersResponse'
+      security:
+      - authorization:
+        - vm:manage
+  /vm/running:
+    get:
+      operationId: vm/list_running_vms
+      summary: List information about currently running VMs
+      description: 'List information about currently running VMs. This information is updated roughly every 30 seconds,
+
+        so this data is not guaranteed to be perfectly up-to-date.
+
+        '
+      tags:
+      - vm
+      parameters: []
+      responses:
+        '200':
+          description: VM List Running VMs Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VMListRunningVMsResponse'
+      security:
+      - authorization:
+        - vm:manage
+  /vm/tag:
+    post:
+      operationId: vm/create_tag
+      summary: Create a new tag for a VM
+      description: 'Creates a new tag for a VM.
+
+        '
+      tags:
+      - vm
+      parameters: []
+      requestBody:
+        description: VM Create Tag Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VMCreateTagRequest'
+      responses:
+        '200':
+          description: VM Create Tag Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VMCreateTagResponse'
+      security:
+      - authorization:
+        - vm:manage
+  /vm/{id}:
+    delete:
+      operationId: vm/delete
+      summary: Delete a VM
+      description: 'Deletes a VM, permanently removing it from the system.
+
+
+        This endpoint can only be used on VMs that belong to your team''s workspace.
+
+        Deleting a VM is irreversible and will permanently delete all data associated with it.
+
+        '
+      tags:
+      - vm
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Sandbox ID
+        example: new
+        schema:
+          type: string
+      responses:
+        '200':
+          description: VM Delete Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VMDeleteResponse'
+      security:
+      - authorization:
+        - vm:manage
+  /vm/{id}/hibernate:
+    post:
+      operationId: vm/hibernate
+      summary: Hibernate a VM
+      description: 'Suspends a running VM, saving a snapshot of its memory and running processes
+
+
+        This endpoint may take an extended amount of time to return (30 seconds). If the VM is not
+
+        currently running, it will return an error (404).
+
+
+        Unless later shut down by request or due to inactivity, a hibernated VM can be resumed with
+
+        minimal latency.
+
+        '
+      tags:
+      - vm
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Sandbox ID
+        example: new
+        schema:
+          type: string
+      requestBody:
+        description: VM Hibernate Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VMHibernateRequest'
+      responses:
+        '200':
+          description: VM Hibernate Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VMHibernateResponse'
+      security:
+      - authorization:
+        - vm:manage
+  /vm/{id}/hibernation_timeout:
+    put:
+      operationId: vm/update_hibernation_timeout
+      summary: Update VM Hibernation Timeout
+      description: 'Updates the hibernation timeout of a running VM.
+
+
+        This endpoint can only be used on VMs that belong to your team''s workspace.
+
+        The new timeout must be greater than 0 and less than or equal to 86400 seconds (24 hours).
+
+        '
+      tags:
+      - vm
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Sandbox ID
+        example: new
+        schema:
+          type: string
+      requestBody:
+        description: VM Update Hibernation Timeout Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VMUpdateHibernationTimeoutRequest'
+      responses:
+        '200':
+          description: VM Update Hibernation Timeout Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VMUpdateHibernationTimeoutResponse'
+      security:
+      - authorization:
+        - vm:manage
+  /vm/{id}/sessions:
+    post:
+      operationId: vm/create_session
+      summary: Create a new session on a VM
+      description: 'Creates a new session on a running VM. A session represents an isolated Linux user, with their own container.
+
+        A session has a single use token that the user can use to connect to the VM. This token has specific permissions
+
+        (currently, read or write). The session is identified by a unique session ID, and the Linux username is based on
+
+        the session ID.
+
+
+        The Git user name and email can be configured via parameters.
+
+
+        This endpoint requires the VM to be running. If the VM is not running, it will return a 404 error.
+
+        '
+      tags:
+      - vm
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Sandbox ID
+        example: new
+        schema:
+          type: string
+      requestBody:
+        description: VM Create Session Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VMCreateSessionRequest'
+      responses:
+        '200':
+          description: VM Create Session Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VMCreateSessionResponse'
+      security:
+      - authorization:
+        - vm:manage
+  /vm/{id}/shutdown:
+    post:
+      operationId: vm/shutdown
+      summary: Shutdown a VM
+      description: 'Stops a running VM, ending all currently running processes
+
+
+        This endpoint may take an extended amount of time to return (30 seconds). If the VM is not
+
+        currently running, it will return an error (404).
+
+
+        Shutdown VMs require additional time to start up.
+
+        '
+      tags:
+      - vm
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Sandbox ID
+        example: new
+        schema:
+          type: string
+      requestBody:
+        description: VM Shutdown Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VMShutdownRequest'
+      responses:
+        '200':
+          description: VM Shutdown Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VMShutdownResponse'
+      security:
+      - authorization:
+        - vm:manage
+  /vm/{id}/specs:
+    put:
+      operationId: vm/update_specs
+      summary: Update VM Specs
+      description: 'Updates the specifications (CPU, memory, storage) of a running VM.
+
+
+        This endpoint can only be used on VMs that belong to your team''s workspace.
+
+        The new tier must not exceed your team''s maximum allowed tier.
+
+        '
+      tags:
+      - vm
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Sandbox ID
+        example: new
+        schema:
+          type: string
+      requestBody:
+        description: VM Update Specs Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VMUpdateSpecsRequest'
+      responses:
+        '200':
+          description: VM Update Specs Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VMUpdateSpecsResponse'
+      security:
+      - authorization:
+        - vm:manage
+  /vm/{id}/start:
+    post:
+      operationId: vm/start
+      summary: Start a VM
+      description: 'Start a virtual machine for the sandbox (devbox) with the given ID.
+
+
+        While the `sandbox:read` scope is required for this endpoint, the resulting VM will have
+
+        permissions according to the `sandbox:edit_code` scope. If present, the returned token will
+
+        have write permissions to the contents of the VM. Otherwise, the returned token will grant
+
+        only read-only permissions.
+
+
+        This endpoint is subject to special rate limits related to concurrent VM usage.
+
+        '
+      tags:
+      - vm
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Sandbox ID
+        example: new
+        schema:
+          type: string
+      requestBody:
+        description: VM Start Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VMStartRequest'
+      responses:
+        '200':
+          description: VM Start Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VMStartResponse'
+      security:
+      - authorization:
+        - sandbox:read
+        - vm:manage
+components:
+  schemas:
+    Response:
+      title: Response
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    VMAssignTagAliasResponse:
+      title: VMAssignTagAliasResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - tag_alias_id
+            - team_id
+            - tag_id
+            - namespace
+            - alias
+            properties:
+              tag_alias_id:
+                type: string
+              team_id:
+                type: string
+              tag_id:
+                type: string
+              namespace:
+                type: string
+              alias:
+                type: string
+    VMListRunningVMsResponse:
+      title: VMListRunningVMsResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - vms
+            - concurrent_vm_count
+            - concurrent_vm_limit
+            properties:
+              vms:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - id
+                  - last_active_at
+                  - session_started_at
+                  - specs
+                  - credit_basis
+                  properties:
+                    id:
+                      type: string
+                    last_active_at:
+                      type: string
+                      format: date-time
+                    session_started_at:
+                      type: string
+                      format: date-time
+                    specs:
+                      type: object
+                      properties:
+                        cpu:
+                          type: integer
+                        memory:
+                          type: integer
+                        storage:
+                          type: integer
+                    credit_basis:
+                      type: string
+              concurrent_vm_count:
+                type: integer
+              concurrent_vm_limit:
+                type: integer
+    VMHibernateResponse:
+      title: VMHibernateResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties: {}
+    VMUpdateHibernationTimeoutResponse:
+      title: VMUpdateHibernationTimeoutResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - id
+            - hibernation_timeout_seconds
+            properties:
+              id:
+                type: string
+              hibernation_timeout_seconds:
+                type: integer
+    VMDeleteResponse:
+      title: VMDeleteResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties: {}
+    VMShutdownResponse:
+      title: VMShutdownResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties: {}
+    Error:
+      title: Error
+      oneOf:
+      - type: string
+      - type: object
+        additionalProperties: true
+    VMStartRequest:
+      title: VMStartRequest
+      type: object
+      properties:
+        tier:
+          type: string
+          enum:
+          - Pico
+          - Nano
+          - Micro
+          - Small
+          - Medium
+          - Large
+          - XLarge
+          example: Micro
+          description: Determines which specs to start the VM with.
+        hibernation_timeout_seconds:
+          type: integer
+          minimum: 1
+          maximum: 86400
+          example: 300
+          description: The time in seconds after which the VM will hibernate due to inactivity.
+        ipcountry:
+          type: string
+          pattern: ^[A-Z]{2}$
+          example: NL
+          description: ISO-3166-1 alpha-2 country code for cluster selection.
+        automatic_wakeup_config:
+          type: object
+          description: Configuration for when the VM should automatically wake up from hibernation
+          properties:
+            http:
+              type: boolean
+              default: true
+              description: Whether the VM should automatically wake up on HTTP requests
+            websocket:
+              type: boolean
+              default: false
+              description: Whether the VM should automatically wake up on WebSocket connections
+    VMUpdateSpecsRequest:
+      title: VMUpdateSpecsRequest
+      type: object
+      required:
+      - tier
+      properties:
+        tier:
+          type: string
+          enum:
+          - Pico
+          - Nano
+          - Micro
+          - Small
+          - Medium
+          - Large
+          - XLarge
+          example: Micro
+          description: Determines which specs to update the VM with.
+    VMCreateTagRequest:
+      title: VMCreateTagRequest
+      description: Create a tag for a list of VM IDs
+      type: object
+      required:
+      - vm_ids
+      properties:
+        vm_ids:
+          type: array
+          items:
+            type: string
+    VMUpdateHibernationTimeoutRequest:
+      title: VMUpdateHibernationTimeoutRequest
+      type: object
+      required:
+      - hibernation_timeout_seconds
+      properties:
+        hibernation_timeout_seconds:
+          type: integer
+          minimum: 1
+          maximum: 86400
+          example: 300
+          description: The new hibernation timeout in seconds.
+    VMCreateTagResponse:
+      title: VMCreateTagResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - tag_id
+            properties:
+              tag_id:
+                type: string
+    VMHibernateRequest:
+      title: VMHibernateRequest
+      type: object
+      properties: {}
+    VMStartResponse:
+      title: VMStartResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - bootup_type
+            - cluster
+            - id
+            - latest_pitcher_version
+            - pitcher_manager_version
+            - pitcher_token
+            - pitcher_url
+            - pitcher_version
+            - reconnect_token
+            - use_pint
+            - user_workspace_path
+            - workspace_path
+            properties:
+              id:
+                type: string
+              cluster:
+                type: string
+              bootup_type:
+                type: string
+              pitcher_url:
+                type: string
+              pitcher_token:
+                type: string
+              pitcher_version:
+                type: string
+              pitcher_manager_version:
+                type: string
+              latest_pitcher_version:
+                type: string
+              reconnect_token:
+                type: string
+              workspace_path:
+                type: string
+              user_workspace_path:
+                type: string
+              use_pint:
+                type: boolean
+              pint_url:
+                type: string
+              pint_token:
+                type: string
+    VMUpdateSpecsResponse:
+      title: VMUpdateSpecsResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - id
+            - tier
+            properties:
+              id:
+                type: string
+              tier:
+                type: string
+    VMCreateSessionResponse:
+      title: VMCreateSessionResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - username
+            - pitcher_token
+            - user_workspace_path
+            - capabilities
+            - permissions
+            - pitcher_url
+            properties:
+              username:
+                type: string
+                description: The Linux username created for this session
+              pitcher_token:
+                type: string
+                description: Token to authenticate with Pitcher (the agent running inside the VM)
+              pitcher_url:
+                type: string
+                description: WebSocket URL to connect to Pitcher
+              user_workspace_path:
+                type: string
+                description: Path to the user's workspace in the VM
+              capabilities:
+                type: array
+                items:
+                  type: string
+                description: List of capabilities that Pitcher has
+              permissions:
+                type: object
+                description: The permissions of the current session
+    VMAssignTagAliasRequest:
+      title: VMAssignTagAliasRequest
+      description: Assign a tag alias to a VM
+      type: object
+      required:
+      - tag_id
+      properties:
+        tag_id:
+          type: string
+    VMCreateSessionRequest:
+      title: VMCreateSessionRequest
+      type: object
+      required:
+      - session_id
+      - permission
+      properties:
+        session_id:
+          type: string
+          pattern: ^[a-zA-Z0-9_-]+$
+          example: my-session-1
+          description: Unique identifier for the session
+        permission:
+          type: string
+          enum:
+          - read
+          - write
+          example: write
+          description: Permission level for the session
+        git_user_name:
+          type: string
+          description: Git user name to configure for this session
+        git_user_email:
+          type: string
+          description: Git user email to configure for this session
+        git_access_token:
+          type: string
+          description: GitHub token for the session
+    VMListClustersResponse:
+      title: VMListClustersResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - clusters
+            properties:
+              clusters:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - host
+                  - slug
+                  properties:
+                    slug:
+                      type: string
+                    host:
+                      type: string
+    VMShutdownRequest:
+      title: VMShutdownRequest
+      type: object
+      properties: {}
+  securitySchemes:
+    authorization:
+      type: http
+      scheme: bearer

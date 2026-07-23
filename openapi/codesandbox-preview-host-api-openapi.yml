@@ -1,0 +1,146 @@
+openapi: 3.0.0
+info:
+  title: CodeSandbox meta preview_host API
+  version: '2023-07-01'
+  description: The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.
+  contact:
+    url: https://codesandbox.io/docs/sdk
+  x-source: https://raw.githubusercontent.com/codesandbox/codesandbox-sdk/main/openapi.json
+servers:
+- url: https://api.codesandbox.io
+security: []
+tags:
+- name: preview_host
+  description: Trusted preview host management
+paths:
+  /workspace/preview_hosts:
+    get:
+      operationId: preview_host/list
+      summary: List Preview Hosts
+      description: 'List all trusted preview hosts for the current team
+
+        '
+      tags:
+      - preview_host
+      parameters: []
+      responses:
+        '201':
+          description: Preview Host List Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreviewHostListResponse'
+      security:
+      - authorization:
+        - vm:manage
+    post:
+      operationId: preview_host/create
+      summary: Create Preview Hosts
+      description: 'Add one or more trusted domains that are allowed to access sandbox previews for this workspace.
+
+        '
+      tags:
+      - preview_host
+      parameters: []
+      requestBody:
+        description: Preview Host Create Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreviewHostRequest'
+      responses:
+        '201':
+          description: Preview Host List Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreviewHostListResponse'
+      security:
+      - authorization:
+        - vm:manage
+    put:
+      operationId: preview_host/update
+      summary: Update Preview Hosts
+      description: 'Replace the list of trusted domains that are allowed to access sandbox previews for this workspace.
+
+        '
+      tags:
+      - preview_host
+      parameters: []
+      requestBody:
+        description: Preview Host Update Request
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreviewHostRequest'
+      responses:
+        '201':
+          description: Preview Host List Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreviewHostListResponse'
+      security:
+      - authorization:
+        - vm:manage
+components:
+  schemas:
+    Response:
+      title: Response
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      title: Error
+      oneOf:
+      - type: string
+      - type: object
+        additionalProperties: true
+    PreviewHostRequest:
+      title: PreviewHostRequest
+      type: object
+      required:
+      - hosts
+      properties:
+        hosts:
+          type: array
+          items:
+            type: string
+            description: Trusted domains that are allowed to access sandbox previews.
+            example: https://example.com
+    PreviewHostListResponse:
+      title: PreviewHostListResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - preview_hosts
+            properties:
+              preview_hosts:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - host
+                  - inserted_at
+                  properties:
+                    host:
+                      type: string
+                    inserted_at:
+                      type: string
+                      format: date-time
+  securitySchemes:
+    authorization:
+      type: http
+      scheme: bearer
