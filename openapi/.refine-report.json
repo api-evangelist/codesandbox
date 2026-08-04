@@ -1,0 +1,28 @@
+{
+  "provider": "codesandbox",
+  "sources": [
+    "codesandbox-meta-api-openapi.yml",
+    "codesandbox-preview-host-api-openapi.yml",
+    "codesandbox-preview-token-api-openapi.yml",
+    "codesandbox-sandbox-api-openapi.yml",
+    "codesandbox-templates-api-openapi.yml",
+    "codesandbox-token-api-openapi.yml",
+    "codesandbox-vm-api-openapi.yml",
+    "codesandbox-workspace-api-openapi.yml"
+  ],
+  "outputs": [
+    "codesandbox-meta-api-openapi.yml",
+    "codesandbox-preview-host-api-openapi.yml",
+    "codesandbox-preview-token-api-openapi.yml",
+    "codesandbox-sandbox-api-openapi.yml",
+    "codesandbox-templates-api-openapi.yml",
+    "codesandbox-token-api-openapi.yml",
+    "codesandbox-vm-api-openapi.yml",
+    "codesandbox-workspace-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
