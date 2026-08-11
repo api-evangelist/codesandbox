@@ -287,6 +287,15 @@ apis:
   - type: JSONLDContext
     url: json-ld/codesandbox-context.jsonld
 common:
+  - type: IssueTracker
+    url: https://github.com/codesandbox/sandpack/issues
+  - type: Releases
+    url: https://github.com/codesandbox/sandpack/releases
+  - type: CodeOfConduct
+    url: https://github.com/codesandbox/sandpack/blob/main/CODE_OF_CONDUCT.md
+  - type: License
+    name: Apache-2.0
+    url: https://github.com/codesandbox/sandpack/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/codesandbox-agentic-access.yml
   - type: DomainSecurity
