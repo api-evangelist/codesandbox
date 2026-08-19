@@ -39,7 +39,7 @@ url: https://raw.githubusercontent.com/api-evangelist/codesandbox/refs/heads/mai
 created: '2026-06-12'
 modified: '2026-06-12'
 
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: codesandbox:define-api
   name: CodeSandbox Define API
