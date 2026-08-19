@@ -1,0 +1,140 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CodeSandbox meta sandbox API",
+    "version": "2023-07-01"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "sandbox",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Sandboxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codesandbox.io/sandbox",
+            "params": [
+              {
+                "name": "tags",
+                "value": "sha-123,feature-x",
+                "type": "query",
+                "description": "Comma-separated list of tags to filter by"
+              },
+              {
+                "name": "order_by",
+                "value": "updated_at",
+                "type": "query",
+                "description": "Field to order results by"
+              },
+              {
+                "name": "direction",
+                "value": "desc",
+                "type": "query",
+                "description": "Order direction"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of sandboxes to return in a single response"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to return"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "If true, only returns VMs for which a heartbeat was received in the last 30 seconds."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List sandboxes from the current workspace with optional filters.\nResults are limited to a maximum of 50 sandboxes per request.\n"
+        },
+        {
+          "info": {
+            "name": "Create a Sandbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codesandbox.io/sandbox",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new sandbox in the current workspace with file contents\n"
+        },
+        {
+          "info": {
+            "name": "Get a Sandbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codesandbox.io/sandbox/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "new",
+                "type": "path",
+                "description": "Short ID of the sandbox to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a sandbox by its ID\n"
+        },
+        {
+          "info": {
+            "name": "Fork a Sandbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codesandbox.io/sandbox/:id/fork",
+            "params": [
+              {
+                "name": "id",
+                "value": "new",
+                "type": "path",
+                "description": "Short ID of the sandbox to fork"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fork an existing sandbox to the current workspace\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

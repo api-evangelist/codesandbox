@@ -1,0 +1,285 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CodeSandbox meta vm API",
+    "version": "2023-07-01"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "vm",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Assign a tag alias to a VM tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.codesandbox.io/vm/alias/:namespace/:alias",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "my-project",
+                "type": "path",
+                "description": "Tag alias namespace"
+              },
+              {
+                "name": "alias",
+                "value": "latest",
+                "type": "path",
+                "description": "Tag alias"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Assign a tag alias to a VM tag.\n"
+        },
+        {
+          "info": {
+            "name": "List all available clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codesandbox.io/vm/clusters",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all available clusters.\n"
+        },
+        {
+          "info": {
+            "name": "List information about currently running VMs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codesandbox.io/vm/running",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List information about currently running VMs. This information is updated roughly every 30 seconds,\nso this data is not guaranteed to be perfectly up-to-date.\n"
+        },
+        {
+          "info": {
+            "name": "Create a new tag for a VM",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codesandbox.io/vm/tag",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new tag for a VM.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a VM",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.codesandbox.io/vm/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "new",
+                "type": "path",
+                "description": "Sandbox ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a VM, permanently removing it from the system.\n\nThis endpoint can only be used on VMs that belong to your team's workspace.\nDeleting a VM is irreversible and will permanently delete all data associated with it.\n"
+        },
+        {
+          "info": {
+            "name": "Hibernate a VM",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codesandbox.io/vm/:id/hibernate",
+            "params": [
+              {
+                "name": "id",
+                "value": "new",
+                "type": "path",
+                "description": "Sandbox ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Suspends a running VM, saving a snapshot of its memory and running processes\n\nThis endpoint may take an extended amount of time to return (30 seconds). If the VM is not\ncurrently running, it will return an error (404).\n\nUnless later shut down by request or due to inactivity, a hibernated VM can be resumed with\nminimal latency.\n"
+        },
+        {
+          "info": {
+            "name": "Update VM Hibernation Timeout",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.codesandbox.io/vm/:id/hibernation_timeout",
+            "params": [
+              {
+                "name": "id",
+                "value": "new",
+                "type": "path",
+                "description": "Sandbox ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the hibernation timeout of a running VM.\n\nThis endpoint can only be used on VMs that belong to your team's workspace.\nThe new timeout must be greater than 0 and less than or equal to 86400 seconds (24 hours).\n"
+        },
+        {
+          "info": {
+            "name": "Create a new session on a VM",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codesandbox.io/vm/:id/sessions",
+            "params": [
+              {
+                "name": "id",
+                "value": "new",
+                "type": "path",
+                "description": "Sandbox ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new session on a running VM. A session represents an isolated Linux user, with their own container.\nA session has a single use token that the user can use to connect to the VM. This token has specific permissions\n(currently, read or write). The session is identified by a unique session ID, and the Linux username is based on\nthe session ID.\n\nThe Git user name and email can be configured via parameters.\n\nThis endpoint requires the VM to be running. If the VM is not running, it will retur"
+        },
+        {
+          "info": {
+            "name": "Shutdown a VM",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codesandbox.io/vm/:id/shutdown",
+            "params": [
+              {
+                "name": "id",
+                "value": "new",
+                "type": "path",
+                "description": "Sandbox ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stops a running VM, ending all currently running processes\n\nThis endpoint may take an extended amount of time to return (30 seconds). If the VM is not\ncurrently running, it will return an error (404).\n\nShutdown VMs require additional time to start up.\n"
+        },
+        {
+          "info": {
+            "name": "Update VM Specs",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.codesandbox.io/vm/:id/specs",
+            "params": [
+              {
+                "name": "id",
+                "value": "new",
+                "type": "path",
+                "description": "Sandbox ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the specifications (CPU, memory, storage) of a running VM.\n\nThis endpoint can only be used on VMs that belong to your team's workspace.\nThe new tier must not exceed your team's maximum allowed tier.\n"
+        },
+        {
+          "info": {
+            "name": "Start a VM",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codesandbox.io/vm/:id/start",
+            "params": [
+              {
+                "name": "id",
+                "value": "new",
+                "type": "path",
+                "description": "Sandbox ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Start a virtual machine for the sandbox (devbox) with the given ID.\n\nWhile the `sandbox:read` scope is required for this endpoint, the resulting VM will have\npermissions according to the `sandbox:edit_code` scope. If present, the returned token will\nhave write permissions to the contents of the VM. Otherwise, the returned token will grant\nonly read-only permissions.\n\nThis endpoint is subject to special rate limits related to concurrent VM usage.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

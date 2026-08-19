@@ -1,0 +1,103 @@
+{
+  "item": [
+    {
+      "id": "4e6c4844-4d26-4107-8470-9065e76a23c8",
+      "name": "meta",
+      "description": {
+        "content": "API metadata and auth context",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4d2b4010-5033-4546-88e0-051904c72b3a",
+          "name": "Metadata about the API",
+          "request": {
+            "name": "Metadata about the API",
+            "description": {},
+            "url": {
+              "path": [
+                "meta",
+                "info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "b3769597-358c-4800-a23e-8c31025af4e5",
+              "name": "Meta Info Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meta",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api\": {\n    \"name\": \"string\",\n    \"latest_version\": \"string\"\n  },\n  \"auth\": {\n    \"scopes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"team\": \"2eb0c8d9-d39c-62c4-21e3-720f18a289d5\",\n    \"version\": \"string\"\n  },\n  \"rate_limits\": {\n    \"concurrent_vms\": {\n      \"limit\": 5922,\n      \"remaining\": 3593\n    },\n    \"sandboxes_hourly\": {\n      \"limit\": 9851,\n      \"remaining\": 1552,\n      \"reset\": 1905\n    },\n    \"requests_hourly\": {\n      \"limit\": 4979,\n      \"remaining\": 6914,\n      \"reset\": 3102\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.codesandbox.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "63ae55d0-7503-48c0-8639-da80cf7e1a06",
+    "name": "CodeSandbox meta API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.",
+      "type": "text/plain"
+    }
+  }
+}

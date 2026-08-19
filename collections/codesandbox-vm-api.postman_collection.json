@@ -1,0 +1,1326 @@
+{
+  "item": [
+    {
+      "id": "c63b040a-5e0c-4010-b6e0-3e68bac200b3",
+      "name": "vm",
+      "description": {
+        "content": "Virtual machine lifecycle management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6647949a-301f-4c6c-a0e1-e39c3774f3d6",
+          "name": "Assign a tag alias to a VM tag",
+          "request": {
+            "name": "Assign a tag alias to a VM tag",
+            "description": {
+              "content": "Assign a tag alias to a VM tag.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vm",
+                "alias",
+                ":namespace",
+                ":alias"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) Tag alias namespace"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alias",
+                  "description": "(Required) Tag alias"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tag_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9ef911a7-cab3-435e-ba3b-0299ede0616e",
+              "name": "VM Assign Tag Alias Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vm",
+                    "alias",
+                    ":namespace",
+                    ":alias"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) Tag alias namespace"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alias",
+                      "description": "(Required) Tag alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {\n    \"tag_alias_id\": \"string\",\n    \"team_id\": \"string\",\n    \"tag_id\": \"string\",\n    \"namespace\": \"string\",\n    \"alias\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "150528d5-8d9a-4f58-9474-14fd08668500",
+          "name": "List all available clusters",
+          "request": {
+            "name": "List all available clusters",
+            "description": {
+              "content": "List all available clusters.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vm",
+                "clusters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b22d41d6-f145-4fef-add0-688ea97f20f9",
+              "name": "VM List Clusters Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vm",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {\n    \"clusters\": [\n      {\n        \"host\": \"string\",\n        \"slug\": \"string\"\n      },\n      {\n        \"host\": \"string\",\n        \"slug\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "002975a5-404f-4980-939c-ba4e9ee7714c",
+          "name": "List information about currently running VMs",
+          "request": {
+            "name": "List information about currently running VMs",
+            "description": {
+              "content": "List information about currently running VMs. This information is updated roughly every 30 seconds,\nso this data is not guaranteed to be perfectly up-to-date.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vm",
+                "running"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "33542fc3-2cf4-47bc-8ef6-10f6c85547fa",
+              "name": "VM List Running VMs Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vm",
+                    "running"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {\n    \"vms\": [\n      {\n        \"id\": \"string\",\n        \"last_active_at\": \"1990-02-14T12:42:22.668Z\",\n        \"session_started_at\": \"2014-12-28T00:06:24.761Z\",\n        \"specs\": {\n          \"cpu\": 1989,\n          \"memory\": 134,\n          \"storage\": 5289\n        },\n        \"credit_basis\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"last_active_at\": \"2009-05-03T18:14:45.588Z\",\n        \"session_started_at\": \"1980-02-22T17:30:05.736Z\",\n        \"specs\": {\n          \"cpu\": 1245,\n          \"memory\": 5600,\n          \"storage\": 7502\n        },\n        \"credit_basis\": \"string\"\n      }\n    ],\n    \"concurrent_vm_count\": 5488,\n    \"concurrent_vm_limit\": 6776\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c89340c6-e474-409d-b952-5edddc9e5746",
+          "name": "Create a new tag for a VM",
+          "request": {
+            "name": "Create a new tag for a VM",
+            "description": {
+              "content": "Creates a new tag for a VM.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vm",
+                "tag"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vm_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5471677c-974d-434d-a981-864ae64c0289",
+              "name": "VM Create Tag Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vm",
+                    "tag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vm_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {\n    \"tag_id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68dbda94-68d8-4fbc-bd4c-8f9cea9e9f6b",
+          "name": "Delete a VM",
+          "request": {
+            "name": "Delete a VM",
+            "description": {
+              "content": "Deletes a VM, permanently removing it from the system.\n\nThis endpoint can only be used on VMs that belong to your team's workspace.\nDeleting a VM is irreversible and will permanently delete all data associated with it.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vm",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sandbox ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0af4f9df-598a-4b8b-8fce-0b90ecc9c2b9",
+              "name": "VM Delete Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vm",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "620ee136-846c-475d-9013-c34fafb99048",
+          "name": "Hibernate a VM",
+          "request": {
+            "name": "Hibernate a VM",
+            "description": {
+              "content": "Suspends a running VM, saving a snapshot of its memory and running processes\n\nThis endpoint may take an extended amount of time to return (30 seconds). If the VM is not\ncurrently running, it will return an error (404).\n\nUnless later shut down by request or due to inactivity, a hibernated VM can be resumed with\nminimal latency.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vm",
+                ":id",
+                "hibernate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sandbox ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c7d3528a-f681-4f34-8b1f-8810354b219d",
+              "name": "VM Hibernate Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vm",
+                    ":id",
+                    "hibernate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cfa3a3bc-8f93-4139-9de0-c0cd92559e58",
+          "name": "Update VM Hibernation Timeout",
+          "request": {
+            "name": "Update VM Hibernation Timeout",
+            "description": {
+              "content": "Updates the hibernation timeout of a running VM.\n\nThis endpoint can only be used on VMs that belong to your team's workspace.\nThe new timeout must be greater than 0 and less than or equal to 86400 seconds (24 hours).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vm",
+                ":id",
+                "hibernation_timeout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sandbox ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"hibernation_timeout_seconds\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3778de56-fc47-4176-b315-77e53dc08a8b",
+              "name": "VM Update Hibernation Timeout Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vm",
+                    ":id",
+                    "hibernation_timeout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hibernation_timeout_seconds\": 300\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {\n    \"id\": \"string\",\n    \"hibernation_timeout_seconds\": 5611\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "262361f2-2b98-44e3-b3bf-f7f75bf7de89",
+          "name": "Create a new session on a VM",
+          "request": {
+            "name": "Create a new session on a VM",
+            "description": {
+              "content": "Creates a new session on a running VM. A session represents an isolated Linux user, with their own container.\nA session has a single use token that the user can use to connect to the VM. This token has specific permissions\n(currently, read or write). The session is identified by a unique session ID, and the Linux username is based on\nthe session ID.\n\nThe Git user name and email can be configured via parameters.\n\nThis endpoint requires the VM to be running. If the VM is not running, it will return a 404 error.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vm",
+                ":id",
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sandbox ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"session_id\": \"<string>\",\n  \"permission\": \"<string>\",\n  \"git_user_name\": \"<string>\",\n  \"git_user_email\": \"<string>\",\n  \"git_access_token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e99973a6-32e1-4470-a065-8ad58f41d3f7",
+              "name": "VM Create Session Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vm",
+                    ":id",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"session_id\": \"my-session-1\",\n  \"permission\": \"write\",\n  \"git_user_name\": \"<string>\",\n  \"git_user_email\": \"<string>\",\n  \"git_access_token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {\n    \"username\": \"string\",\n    \"pitcher_token\": \"string\",\n    \"user_workspace_path\": \"string\",\n    \"capabilities\": [\n      \"string\",\n      \"string\"\n    ],\n    \"permissions\": {},\n    \"pitcher_url\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a350262-2606-4c28-9bb7-2a22f1733e0c",
+          "name": "Shutdown a VM",
+          "request": {
+            "name": "Shutdown a VM",
+            "description": {
+              "content": "Stops a running VM, ending all currently running processes\n\nThis endpoint may take an extended amount of time to return (30 seconds). If the VM is not\ncurrently running, it will return an error (404).\n\nShutdown VMs require additional time to start up.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vm",
+                ":id",
+                "shutdown"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sandbox ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a94122ce-caa9-4573-a7e0-3d82f16fe648",
+              "name": "VM Shutdown Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vm",
+                    ":id",
+                    "shutdown"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5d490c0-8674-4466-b4bb-c23ddd505379",
+          "name": "Update VM Specs",
+          "request": {
+            "name": "Update VM Specs",
+            "description": {
+              "content": "Updates the specifications (CPU, memory, storage) of a running VM.\n\nThis endpoint can only be used on VMs that belong to your team's workspace.\nThe new tier must not exceed your team's maximum allowed tier.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vm",
+                ":id",
+                "specs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sandbox ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tier\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6eeadbc0-b8ad-4e74-b54d-53bfc826b5e0",
+              "name": "VM Update Specs Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vm",
+                    ":id",
+                    "specs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tier\": \"Micro\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {\n    \"id\": \"string\",\n    \"tier\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4952ed4c-b768-4b9c-bc0d-74aa0190c24c",
+          "name": "Start a VM",
+          "request": {
+            "name": "Start a VM",
+            "description": {
+              "content": "Start a virtual machine for the sandbox (devbox) with the given ID.\n\nWhile the `sandbox:read` scope is required for this endpoint, the resulting VM will have\npermissions according to the `sandbox:edit_code` scope. If present, the returned token will\nhave write permissions to the contents of the VM. Otherwise, the returned token will grant\nonly read-only permissions.\n\nThis endpoint is subject to special rate limits related to concurrent VM usage.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vm",
+                ":id",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sandbox ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tier\": \"<string>\",\n  \"hibernation_timeout_seconds\": \"<integer>\",\n  \"ipcountry\": \"<string>\",\n  \"automatic_wakeup_config\": {\n    \"http\": true,\n    \"websocket\": false\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d2b90a73-045c-45d4-aeab-d52c1b32f3eb",
+              "name": "VM Start Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vm",
+                    ":id",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tier\": \"Micro\",\n  \"hibernation_timeout_seconds\": 300,\n  \"ipcountry\": \"NL\",\n  \"automatic_wakeup_config\": {\n    \"http\": true,\n    \"websocket\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {\n    \"bootup_type\": \"string\",\n    \"cluster\": \"string\",\n    \"id\": \"string\",\n    \"latest_pitcher_version\": \"string\",\n    \"pitcher_manager_version\": \"string\",\n    \"pitcher_token\": \"string\",\n    \"pitcher_url\": \"string\",\n    \"pitcher_version\": \"string\",\n    \"reconnect_token\": \"string\",\n    \"use_pint\": true,\n    \"user_workspace_path\": \"string\",\n    \"workspace_path\": \"string\",\n    \"pint_url\": \"string\",\n    \"pint_token\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.codesandbox.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5cbbbdef-5c30-4ba8-972f-5d3baca4ffa3",
+    "name": "CodeSandbox meta vm API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.",
+      "type": "text/plain"
+    }
+  }
+}

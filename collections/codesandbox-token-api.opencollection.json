@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CodeSandbox meta token API",
+    "version": "2023-07-01"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "token",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an API Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codesandbox.io/org/workspace/:team_id/tokens",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "ws_123abcdef",
+                "type": "path",
+                "description": "ID of the workspace to create the token in"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new API token for a workspace that is part of the current organization.\n"
+        },
+        {
+          "info": {
+            "name": "Update an API Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.codesandbox.io/org/workspace/:team_id/tokens/:token_id",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "ws_123abcdef",
+                "type": "path",
+                "description": "ID of the workspace the token belongs to"
+              },
+              {
+                "name": "token_id",
+                "value": "tok_123abcdef",
+                "type": "path",
+                "description": "ID of token to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an API token for a workspace that is part of the current organization.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

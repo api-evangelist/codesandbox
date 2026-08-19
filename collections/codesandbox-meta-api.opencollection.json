@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CodeSandbox meta API",
+    "version": "2023-07-01"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "meta",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Metadata about the API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codesandbox.io/meta/info"
+          },
+          "docs": "Metadata about the API"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
