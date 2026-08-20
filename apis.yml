@@ -84,6 +84,8 @@ apis:
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
   tags:
+  - Meta
+  tags_raw:
   - meta
   properties:
   - type: OpenAPI
@@ -109,7 +111,8 @@ apis:
   description: Trusted preview host management
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
-  tags:
+  tags: []
+  tags_raw:
   - preview_host
   properties:
   - type: OpenAPI
@@ -135,7 +138,8 @@ apis:
   description: Preview token management for private sandboxes
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
-  tags:
+  tags: []
+  tags_raw:
   - preview_token
   properties:
   - type: OpenAPI
@@ -162,6 +166,8 @@ apis:
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
   tags:
+  - Sandbox
+  tags_raw:
   - sandbox
   properties:
   - type: OpenAPI
@@ -188,6 +194,8 @@ apis:
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
   tags:
+  - Templates
+  tags_raw:
   - templates
   properties:
   - type: OpenAPI
@@ -214,6 +222,8 @@ apis:
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
   tags:
+  - Token
+  tags_raw:
   - token
   properties:
   - type: OpenAPI
@@ -266,6 +276,8 @@ apis:
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
   tags:
+  - Workspace
+  tags_raw:
   - workspace
   properties:
   - type: OpenAPI
