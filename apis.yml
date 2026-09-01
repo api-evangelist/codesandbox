@@ -180,7 +180,7 @@ apis:
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
   tags:
-  - sandbox
+  - Sandbox
   tags_raw:
   - sandbox
   properties:
