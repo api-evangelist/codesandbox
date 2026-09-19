@@ -82,6 +82,12 @@ apis:
     embedding.
   humanURL: https://sandpack.codesandbox.io/docs
   tags:
+  - Embeddings
+  - Code Editor
+  - React
+  - JavaScript
+  - Component Toolkit
+  tags_raw:
   - Embedding
   - Code Editor
   - React
@@ -236,7 +242,7 @@ apis:
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
   tags:
-  - Token
+  - Tokens
   tags_raw:
   - token
   properties:
