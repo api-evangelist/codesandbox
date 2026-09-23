@@ -1,14 +1,7 @@
 {
   "provider": "codesandbox",
   "sources": [
-    "codesandbox-meta-api-openapi.yml",
-    "codesandbox-preview-host-api-openapi.yml",
-    "codesandbox-preview-token-api-openapi.yml",
-    "codesandbox-sandbox-api-openapi.yml",
-    "codesandbox-templates-api-openapi.yml",
-    "codesandbox-token-api-openapi.yml",
-    "codesandbox-vm-api-openapi.yml",
-    "codesandbox-workspace-api-openapi.yml"
+    "_original/codesandbox-sdk-openapi.yml"
   ],
   "outputs": [
     "codesandbox-meta-api-openapi.yml",
@@ -23,6 +16,19 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "codesandbox-sdk-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "codesandbox-meta-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "codesandbox-preview-host-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "codesandbox-preview-token-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "codesandbox-sandbox-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "codesandbox-templates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "codesandbox-token-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "codesandbox-vm-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "codesandbox-workspace-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

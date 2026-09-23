@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: CodeSandbox meta templates API
+  title: CodeSandbox Templates API
   version: '2023-07-01'
   description: The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.
   contact:
@@ -10,18 +10,16 @@ servers:
 - url: https://api.codesandbox.io
 security: []
 tags:
-- name: templates
+- name: Templates
   description: Sandbox template management
 paths:
   /templates:
     post:
       operationId: templates/create
       summary: Create a template
-      description: 'Create a new template in the current workspace (creates 3 sandboxes and tags them)
-
-        '
+      description: Create a new template in the current workspace (creates 3 sandboxes and tags them)
       tags:
-      - templates
+      - Templates
       parameters: []
       requestBody:
         description: Template Create Request
@@ -42,6 +40,33 @@ paths:
         - template:create
 components:
   schemas:
+    TemplateCreateResponse:
+      title: TemplateCreateResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - tag
+            - sandboxes
+            properties:
+              tag:
+                type: string
+              sandboxes:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - id
+                  - cluster
+                  properties:
+                    id:
+                      type: string
+                    cluster:
+                      type: string
     TemplateCreateRequest:
       title: TemplateCreateRequest
       type: object
@@ -82,33 +107,6 @@ components:
       - type: string
       - type: object
         additionalProperties: true
-    TemplateCreateResponse:
-      title: TemplateCreateResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            required:
-            - tag
-            - sandboxes
-            properties:
-              tag:
-                type: string
-              sandboxes:
-                type: array
-                items:
-                  type: object
-                  required:
-                  - id
-                  - cluster
-                  properties:
-                    id:
-                      type: string
-                    cluster:
-                      type: string
   securitySchemes:
     authorization:
       type: http
