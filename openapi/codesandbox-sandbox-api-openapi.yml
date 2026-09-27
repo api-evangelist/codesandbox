@@ -167,12 +167,55 @@ paths:
         - sandbox:create
 components:
   schemas:
-    Error:
-      title: Error
-      oneOf:
-      - type: string
+    SandboxCreateResponse:
+      title: SandboxCreateResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
       - type: object
-        additionalProperties: true
+        properties:
+          data:
+            type: object
+            required:
+            - alias
+            - id
+            - title
+            properties:
+              id:
+                type: string
+              alias:
+                type: string
+              title:
+                type:
+                - string
+                - 'null'
+    SandboxForkResponse:
+      title: SandboxForkResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - alias
+            - id
+            - title
+            properties:
+              id:
+                type: string
+              alias:
+                type: string
+              title:
+                type:
+                - string
+                - 'null'
+              start_response:
+                type:
+                - object
+                - 'null'
+                description: VM start response. Only present when start_options were provided in the request.
     SandboxForkRequest:
       title: SandboxForkRequest
       type: object
@@ -239,70 +282,6 @@ components:
                 websocket:
                   type: boolean
                   default: false
-    SandboxCreateResponse:
-      title: SandboxCreateResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            required:
-            - alias
-            - id
-            - title
-            properties:
-              id:
-                type: string
-              alias:
-                type: string
-              title:
-                type:
-                - string
-                - 'null'
-    SandboxListResponse:
-      title: SandboxListResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            required:
-            - sandboxes
-            - pagination
-            properties:
-              sandboxes:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Sandbox'
-              pagination:
-                type: object
-                required:
-                - total_records
-                - current_page
-                - next_page
-                properties:
-                  total_records:
-                    type: integer
-                  current_page:
-                    type: integer
-                  next_page:
-                    type:
-                    - integer
-                    - 'null'
-                    description: The number of the next page, if any. If `null`, the current page is the last page of records.
-    SandboxGetResponse:
-      title: SandboxGetResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            $ref: '#/components/schemas/Sandbox'
     Sandbox:
       title: Sandbox
       type: object
@@ -344,16 +323,6 @@ components:
           properties:
             use_pint:
               type: boolean
-    Response:
-      title: Response
-      type: object
-      properties:
-        success:
-          type: boolean
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     SandboxCreateRequest:
       title: SandboxCreateRequest
       type: object
@@ -436,8 +405,27 @@ components:
             use_pint:
               type: boolean
               description: Whether to use Pint for the sandbox.
-    SandboxForkResponse:
-      title: SandboxForkResponse
+    SandboxGetResponse:
+      title: SandboxGetResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/Sandbox'
+    Response:
+      title: Response
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    SandboxListResponse:
+      title: SandboxListResponse
       type: object
       allOf:
       - $ref: '#/components/schemas/Response'
@@ -446,23 +434,35 @@ components:
           data:
             type: object
             required:
-            - alias
-            - id
-            - title
+            - sandboxes
+            - pagination
             properties:
-              id:
-                type: string
-              alias:
-                type: string
-              title:
-                type:
-                - string
-                - 'null'
-              start_response:
-                type:
-                - object
-                - 'null'
-                description: VM start response. Only present when start_options were provided in the request.
+              sandboxes:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sandbox'
+              pagination:
+                type: object
+                required:
+                - total_records
+                - current_page
+                - next_page
+                properties:
+                  total_records:
+                    type: integer
+                  current_page:
+                    type: integer
+                  next_page:
+                    type:
+                    - integer
+                    - 'null'
+                    description: The number of the next page, if any. If `null`, the current page is the last page of records.
+    Error:
+      title: Error
+      oneOf:
+      - type: string
+      - type: object
+        additionalProperties: true
   securitySchemes:
     authorization:
       type: http

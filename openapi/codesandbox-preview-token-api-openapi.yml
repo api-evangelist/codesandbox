@@ -134,14 +134,8 @@ paths:
         - preview_token:manage
 components:
   schemas:
-    Error:
-      title: Error
-      oneOf:
-      - type: string
-      - type: object
-        additionalProperties: true
-    PreviewTokenListResponse:
-      title: PreviewTokenListResponse
+    PreviewTokenRevokeAllResponse:
+      title: PreviewTokenRevokeAllResponse
       type: object
       allOf:
       - $ref: '#/components/schemas/Response'
@@ -149,16 +143,7 @@ components:
         properties:
           data:
             type: object
-            required:
-            - tokens
-            - sandbox_id
-            properties:
-              sandbox_id:
-                type: string
-              tokens:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PreviewToken'
+            properties: {}
     PreviewToken:
       title: PreviewToken
       type: object
@@ -180,6 +165,72 @@ components:
           type:
           - string
           - 'null'
+    PreviewTokenCreateRequest:
+      title: PreviewTokenCreateRequest
+      type: object
+      properties:
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: UTC Timestamp until when this token is valid. Omitting this field will create a token without an expiry.
+    PreviewTokenUpdateResponse:
+      title: PreviewTokenUpdateResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - sandbox_id
+            - token
+            properties:
+              sandbox_id:
+                type: string
+              token:
+                $ref: '#/components/schemas/PreviewToken'
+    PreviewTokenUpdateRequest:
+      title: PreviewTokenUpdateRequest
+      type: object
+      properties:
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: UTC Timestamp until when this token is valid.
+    PreviewTokenListResponse:
+      title: PreviewTokenListResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - tokens
+            - sandbox_id
+            properties:
+              sandbox_id:
+                type: string
+              tokens:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PreviewToken'
+    Response:
+      title: Response
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     PreviewTokenCreateResponse:
       title: PreviewTokenCreateResponse
       type: object
@@ -204,63 +255,12 @@ components:
                   properties:
                     token:
                       type: string
-    PreviewTokenUpdateRequest:
-      title: PreviewTokenUpdateRequest
-      type: object
-      properties:
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: UTC Timestamp until when this token is valid.
-    PreviewTokenCreateRequest:
-      title: PreviewTokenCreateRequest
-      type: object
-      properties:
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: UTC Timestamp until when this token is valid. Omitting this field will create a token without an expiry.
-    Response:
-      title: Response
-      type: object
-      properties:
-        success:
-          type: boolean
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    PreviewTokenUpdateResponse:
-      title: PreviewTokenUpdateResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
+    Error:
+      title: Error
+      oneOf:
+      - type: string
       - type: object
-        properties:
-          data:
-            type: object
-            required:
-            - sandbox_id
-            - token
-            properties:
-              sandbox_id:
-                type: string
-              token:
-                $ref: '#/components/schemas/PreviewToken'
-    PreviewTokenRevokeAllResponse:
-      title: PreviewTokenRevokeAllResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            properties: {}
+        additionalProperties: true
   securitySchemes:
     authorization:
       type: http

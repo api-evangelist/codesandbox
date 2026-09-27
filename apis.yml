@@ -99,7 +99,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/codesandbox/sandpack
 - aid: codesandbox:codesandbox-meta-api
-  name: CodeSandbox meta API
+  name: CodeSandbox Meta API
   description: API metadata and auth context
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
@@ -127,7 +127,7 @@ apis:
   - type: JSONLDContext
     url: json-ld/codesandbox-context.jsonld
 - aid: codesandbox:codesandbox-preview-host-api
-  name: CodeSandbox preview_host API
+  name: CodeSandbox Preview Host API
   description: Trusted preview host management
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
@@ -154,7 +154,7 @@ apis:
   - type: JSONLDContext
     url: json-ld/codesandbox-context.jsonld
 - aid: codesandbox:codesandbox-preview-token-api
-  name: CodeSandbox preview_token API
+  name: CodeSandbox Preview Token API
   description: Preview token management for private sandboxes
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
@@ -181,7 +181,7 @@ apis:
   - type: JSONLDContext
     url: json-ld/codesandbox-context.jsonld
 - aid: codesandbox:codesandbox-sandbox-api
-  name: CodeSandbox sandbox API
+  name: CodeSandbox Sandbox API
   description: Browser and VM sandbox management
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
@@ -209,7 +209,7 @@ apis:
   - type: JSONLDContext
     url: json-ld/codesandbox-context.jsonld
 - aid: codesandbox:codesandbox-templates-api
-  name: CodeSandbox templates API
+  name: CodeSandbox Templates API
   description: Sandbox template management
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
@@ -237,7 +237,7 @@ apis:
   - type: JSONLDContext
     url: json-ld/codesandbox-context.jsonld
 - aid: codesandbox:codesandbox-token-api
-  name: CodeSandbox token API
+  name: CodeSandbox Token API
   description: API token management
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
@@ -265,7 +265,7 @@ apis:
   - type: JSONLDContext
     url: json-ld/codesandbox-context.jsonld
 - aid: codesandbox:codesandbox-vm-api
-  name: CodeSandbox vm API
+  name: CodeSandbox Vm API
   description: Virtual machine lifecycle management
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io
@@ -291,7 +291,7 @@ apis:
   - type: JSONLDContext
     url: json-ld/codesandbox-context.jsonld
 - aid: codesandbox:codesandbox-workspace-api
-  name: CodeSandbox workspace API
+  name: CodeSandbox Workspace API
   description: Workspace and organization management
   humanURL: https://codesandbox.io/docs/sdk
   baseURL: https://api.codesandbox.io

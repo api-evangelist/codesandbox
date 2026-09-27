@@ -86,12 +86,34 @@ paths:
         - token:manage
 components:
   schemas:
-    Error:
-      title: Error
-      oneOf:
-      - type: string
-      - type: object
-        additionalProperties: true
+    TokenUpdateRequest:
+      title: TokenUpdateRequest
+      description: Updateable fields for API Tokens.
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        scopes:
+          type: array
+          items:
+            enum:
+            - sandbox_create
+            - sandbox_edit_code
+            - sandbox_read
+            - vm_manage
+        default_version:
+          type:
+          - string
+          - 'null'
+          format: date
     TokenCreateRequest:
       title: TokenCreateRequest
       type: object
@@ -121,34 +143,6 @@ components:
           - 'null'
           format: date
           description: API Version to use, formatted as YYYY-MM-DD.
-    TokenUpdateRequest:
-      title: TokenUpdateRequest
-      description: Updateable fields for API Tokens.
-      type: object
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        scopes:
-          type: array
-          items:
-            enum:
-            - sandbox_create
-            - sandbox_edit_code
-            - sandbox_read
-            - vm_manage
-        default_version:
-          type:
-          - string
-          - 'null'
-          format: date
     TokenCreateResponse:
       title: TokenCreateResponse
       type: object
@@ -184,16 +178,6 @@ components:
                 type:
                 - string
                 - 'null'
-    Response:
-      title: Response
-      type: object
-      properties:
-        success:
-          type: boolean
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     TokenUpdateResponse:
       title: TokenUpdateResponse
       type: object
@@ -226,6 +210,22 @@ components:
                 - string
                 - 'null'
                 format: date-time
+    Response:
+      title: Response
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      title: Error
+      oneOf:
+      - type: string
+      - type: object
+        additionalProperties: true
   securitySchemes:
     authorization:
       type: http

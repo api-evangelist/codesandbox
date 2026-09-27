@@ -392,31 +392,8 @@ paths:
         - vm:manage
 components:
   schemas:
-    Error:
-      title: Error
-      oneOf:
-      - type: string
-      - type: object
-        additionalProperties: true
-    VMUpdateHibernationTimeoutResponse:
-      title: VMUpdateHibernationTimeoutResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            required:
-            - id
-            - hibernation_timeout_seconds
-            properties:
-              id:
-                type: string
-              hibernation_timeout_seconds:
-                type: integer
-    VMHibernateResponse:
-      title: VMHibernateResponse
+    VMDeleteResponse:
+      title: VMDeleteResponse
       type: object
       allOf:
       - $ref: '#/components/schemas/Response'
@@ -425,6 +402,57 @@ components:
           data:
             type: object
             properties: {}
+    VMStartRequest:
+      title: VMStartRequest
+      type: object
+      properties:
+        tier:
+          type: string
+          enum:
+          - Pico
+          - Nano
+          - Micro
+          - Small
+          - Medium
+          - Large
+          - XLarge
+          example: Micro
+          description: Determines which specs to start the VM with.
+        hibernation_timeout_seconds:
+          type: integer
+          minimum: 1
+          maximum: 86400
+          example: 300
+          description: The time in seconds after which the VM will hibernate due to inactivity.
+        ipcountry:
+          type: string
+          pattern: ^[A-Z]{2}$
+          example: NL
+          description: ISO-3166-1 alpha-2 country code for cluster selection.
+        automatic_wakeup_config:
+          type: object
+          description: Configuration for when the VM should automatically wake up from hibernation
+          properties:
+            http:
+              type: boolean
+              default: true
+              description: Whether the VM should automatically wake up on HTTP requests
+            websocket:
+              type: boolean
+              default: false
+              description: Whether the VM should automatically wake up on WebSocket connections
+    VMUpdateHibernationTimeoutRequest:
+      title: VMUpdateHibernationTimeoutRequest
+      type: object
+      required:
+      - hibernation_timeout_seconds
+      properties:
+        hibernation_timeout_seconds:
+          type: integer
+          minimum: 1
+          maximum: 86400
+          example: 300
+          description: The new hibernation timeout in seconds.
     VMUpdateSpecsRequest:
       title: VMUpdateSpecsRequest
       type: object
@@ -443,44 +471,87 @@ components:
           - XLarge
           example: Micro
           description: Determines which specs to update the VM with.
-    VMCreateSessionRequest:
-      title: VMCreateSessionRequest
+    VMHibernateRequest:
+      title: VMHibernateRequest
       type: object
-      required:
-      - session_id
-      - permission
-      properties:
-        session_id:
-          type: string
-          pattern: ^[a-zA-Z0-9_-]+$
-          example: my-session-1
-          description: Unique identifier for the session
-        permission:
-          type: string
-          enum:
-          - read
-          - write
-          example: write
-          description: Permission level for the session
-        git_user_name:
-          type: string
-          description: Git user name to configure for this session
-        git_user_email:
-          type: string
-          description: Git user email to configure for this session
-        git_access_token:
-          type: string
-          description: GitHub token for the session
-    Response:
-      title: Response
+      properties: {}
+    VMListClustersResponse:
+      title: VMListClustersResponse
       type: object
-      properties:
-        success:
-          type: boolean
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - clusters
+            properties:
+              clusters:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - host
+                  - slug
+                  properties:
+                    slug:
+                      type: string
+                    host:
+                      type: string
+    VMUpdateHibernationTimeoutResponse:
+      title: VMUpdateHibernationTimeoutResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - id
+            - hibernation_timeout_seconds
+            properties:
+              id:
+                type: string
+              hibernation_timeout_seconds:
+                type: integer
+    Error:
+      title: Error
+      oneOf:
+      - type: string
+      - type: object
+        additionalProperties: true
+    VMShutdownRequest:
+      title: VMShutdownRequest
+      type: object
+      properties: {}
+    VMAssignTagAliasResponse:
+      title: VMAssignTagAliasResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - tag_alias_id
+            - team_id
+            - tag_id
+            - namespace
+            - alias
+            properties:
+              tag_alias_id:
+                type: string
+              team_id:
+                type: string
+              tag_id:
+                type: string
+              namespace:
+                type: string
+              alias:
+                type: string
     VMCreateTagResponse:
       title: VMCreateTagResponse
       type: object
@@ -495,10 +566,6 @@ components:
             properties:
               tag_id:
                 type: string
-    VMHibernateRequest:
-      title: VMHibernateRequest
-      type: object
-      properties: {}
     VMListRunningVMsResponse:
       title: VMListRunningVMsResponse
       type: object
@@ -547,71 +614,6 @@ components:
                 type: integer
               concurrent_vm_limit:
                 type: integer
-    VMStartRequest:
-      title: VMStartRequest
-      type: object
-      properties:
-        tier:
-          type: string
-          enum:
-          - Pico
-          - Nano
-          - Micro
-          - Small
-          - Medium
-          - Large
-          - XLarge
-          example: Micro
-          description: Determines which specs to start the VM with.
-        hibernation_timeout_seconds:
-          type: integer
-          minimum: 1
-          maximum: 86400
-          example: 300
-          description: The time in seconds after which the VM will hibernate due to inactivity.
-        ipcountry:
-          type: string
-          pattern: ^[A-Z]{2}$
-          example: NL
-          description: ISO-3166-1 alpha-2 country code for cluster selection.
-        automatic_wakeup_config:
-          type: object
-          description: Configuration for when the VM should automatically wake up from hibernation
-          properties:
-            http:
-              type: boolean
-              default: true
-              description: Whether the VM should automatically wake up on HTTP requests
-            websocket:
-              type: boolean
-              default: false
-              description: Whether the VM should automatically wake up on WebSocket connections
-    VMAssignTagAliasResponse:
-      title: VMAssignTagAliasResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            required:
-            - tag_alias_id
-            - team_id
-            - tag_id
-            - namespace
-            - alias
-            properties:
-              tag_alias_id:
-                type: string
-              team_id:
-                type: string
-              tag_id:
-                type: string
-              namespace:
-                type: string
-              alias:
-                type: string
     VMShutdownResponse:
       title: VMShutdownResponse
       type: object
@@ -633,57 +635,6 @@ components:
           type: array
           items:
             type: string
-    VMCreateSessionResponse:
-      title: VMCreateSessionResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            required:
-            - username
-            - pitcher_token
-            - user_workspace_path
-            - capabilities
-            - permissions
-            - pitcher_url
-            properties:
-              username:
-                type: string
-                description: The Linux username created for this session
-              pitcher_token:
-                type: string
-                description: Token to authenticate with Pitcher (the agent running inside the VM)
-              pitcher_url:
-                type: string
-                description: WebSocket URL to connect to Pitcher
-              user_workspace_path:
-                type: string
-                description: Path to the user's workspace in the VM
-              capabilities:
-                type: array
-                items:
-                  type: string
-                description: List of capabilities that Pitcher has
-              permissions:
-                type: object
-                description: The permissions of the current session
-    VMShutdownRequest:
-      title: VMShutdownRequest
-      type: object
-      properties: {}
-    VMDeleteResponse:
-      title: VMDeleteResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            properties: {}
     VMStartResponse:
       title: VMStartResponse
       type: object
@@ -752,6 +703,53 @@ components:
                 type: string
               tier:
                 type: string
+    VMHibernateResponse:
+      title: VMHibernateResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties: {}
+    VMCreateSessionResponse:
+      title: VMCreateSessionResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - username
+            - pitcher_token
+            - user_workspace_path
+            - capabilities
+            - permissions
+            - pitcher_url
+            properties:
+              username:
+                type: string
+                description: The Linux username created for this session
+              pitcher_token:
+                type: string
+                description: Token to authenticate with Pitcher (the agent running inside the VM)
+              pitcher_url:
+                type: string
+                description: WebSocket URL to connect to Pitcher
+              user_workspace_path:
+                type: string
+                description: Path to the user's workspace in the VM
+              capabilities:
+                type: array
+                items:
+                  type: string
+                description: List of capabilities that Pitcher has
+              permissions:
+                type: object
+                description: The permissions of the current session
     VMAssignTagAliasRequest:
       title: VMAssignTagAliasRequest
       description: Assign a tag alias to a VM
@@ -761,42 +759,44 @@ components:
       properties:
         tag_id:
           type: string
-    VMListClustersResponse:
-      title: VMListClustersResponse
+    Response:
+      title: Response
       type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            required:
-            - clusters
-            properties:
-              clusters:
-                type: array
-                items:
-                  type: object
-                  required:
-                  - host
-                  - slug
-                  properties:
-                    slug:
-                      type: string
-                    host:
-                      type: string
-    VMUpdateHibernationTimeoutRequest:
-      title: VMUpdateHibernationTimeoutRequest
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    VMCreateSessionRequest:
+      title: VMCreateSessionRequest
       type: object
       required:
-      - hibernation_timeout_seconds
+      - session_id
+      - permission
       properties:
-        hibernation_timeout_seconds:
-          type: integer
-          minimum: 1
-          maximum: 86400
-          example: 300
-          description: The new hibernation timeout in seconds.
+        session_id:
+          type: string
+          pattern: ^[a-zA-Z0-9_-]+$
+          example: my-session-1
+          description: Unique identifier for the session
+        permission:
+          type: string
+          enum:
+          - read
+          - write
+          example: write
+          description: Permission level for the session
+        git_user_name:
+          type: string
+          description: Git user name to configure for this session
+        git_user_email:
+          type: string
+          description: Git user email to configure for this session
+        git_access_token:
+          type: string
+          description: GitHub token for the session
   securitySchemes:
     authorization:
       type: http

@@ -40,12 +40,6 @@ paths:
         - workspace:create
 components:
   schemas:
-    Error:
-      title: Error
-      oneOf:
-      - type: string
-      - type: object
-        additionalProperties: true
     WorkspaceCreateRequest:
       title: WorkspaceCreateRequest
       type: object
@@ -83,6 +77,12 @@ components:
                 type: string
               name:
                 type: string
+    Error:
+      title: Error
+      oneOf:
+      - type: string
+      - type: object
+        additionalProperties: true
   securitySchemes:
     authorization:
       type: http
