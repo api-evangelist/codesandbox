@@ -81,28 +81,6 @@ paths:
         - vm:manage
 components:
   schemas:
-    PreviewHostRequest:
-      title: PreviewHostRequest
-      type: object
-      required:
-      - hosts
-      properties:
-        hosts:
-          type: array
-          items:
-            type: string
-            description: Trusted domains that are allowed to access sandbox previews.
-            example: https://example.com
-    Response:
-      title: Response
-      type: object
-      properties:
-        success:
-          type: boolean
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     PreviewHostListResponse:
       title: PreviewHostListResponse
       type: object
@@ -128,6 +106,28 @@ components:
                     inserted_at:
                       type: string
                       format: date-time
+    PreviewHostRequest:
+      title: PreviewHostRequest
+      type: object
+      required:
+      - hosts
+      properties:
+        hosts:
+          type: array
+          items:
+            type: string
+            description: Trusted domains that are allowed to access sandbox previews.
+            example: https://example.com
+    Response:
+      title: Response
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     Error:
       title: Error
       oneOf:

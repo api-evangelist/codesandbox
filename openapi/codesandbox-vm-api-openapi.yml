@@ -392,89 +392,6 @@ paths:
         - vm:manage
 components:
   schemas:
-    VMDeleteResponse:
-      title: VMDeleteResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            properties: {}
-    VMStartRequest:
-      title: VMStartRequest
-      type: object
-      properties:
-        tier:
-          type: string
-          enum:
-          - Pico
-          - Nano
-          - Micro
-          - Small
-          - Medium
-          - Large
-          - XLarge
-          example: Micro
-          description: Determines which specs to start the VM with.
-        hibernation_timeout_seconds:
-          type: integer
-          minimum: 1
-          maximum: 86400
-          example: 300
-          description: The time in seconds after which the VM will hibernate due to inactivity.
-        ipcountry:
-          type: string
-          pattern: ^[A-Z]{2}$
-          example: NL
-          description: ISO-3166-1 alpha-2 country code for cluster selection.
-        automatic_wakeup_config:
-          type: object
-          description: Configuration for when the VM should automatically wake up from hibernation
-          properties:
-            http:
-              type: boolean
-              default: true
-              description: Whether the VM should automatically wake up on HTTP requests
-            websocket:
-              type: boolean
-              default: false
-              description: Whether the VM should automatically wake up on WebSocket connections
-    VMUpdateHibernationTimeoutRequest:
-      title: VMUpdateHibernationTimeoutRequest
-      type: object
-      required:
-      - hibernation_timeout_seconds
-      properties:
-        hibernation_timeout_seconds:
-          type: integer
-          minimum: 1
-          maximum: 86400
-          example: 300
-          description: The new hibernation timeout in seconds.
-    VMUpdateSpecsRequest:
-      title: VMUpdateSpecsRequest
-      type: object
-      required:
-      - tier
-      properties:
-        tier:
-          type: string
-          enum:
-          - Pico
-          - Nano
-          - Micro
-          - Small
-          - Medium
-          - Large
-          - XLarge
-          example: Micro
-          description: Determines which specs to update the VM with.
-    VMHibernateRequest:
-      title: VMHibernateRequest
-      type: object
-      properties: {}
     VMListClustersResponse:
       title: VMListClustersResponse
       type: object
@@ -516,42 +433,73 @@ components:
                 type: string
               hibernation_timeout_seconds:
                 type: integer
-    Error:
-      title: Error
-      oneOf:
-      - type: string
-      - type: object
-        additionalProperties: true
-    VMShutdownRequest:
-      title: VMShutdownRequest
+    VMStartRequest:
+      title: VMStartRequest
       type: object
-      properties: {}
-    VMAssignTagAliasResponse:
-      title: VMAssignTagAliasResponse
+      properties:
+        tier:
+          type: string
+          enum:
+          - Pico
+          - Nano
+          - Micro
+          - Small
+          - Medium
+          - Large
+          - XLarge
+          example: Micro
+          description: Determines which specs to start the VM with.
+        hibernation_timeout_seconds:
+          type: integer
+          minimum: 1
+          maximum: 86400
+          example: 300
+          description: The time in seconds after which the VM will hibernate due to inactivity.
+        ipcountry:
+          type: string
+          pattern: ^[A-Z]{2}$
+          example: NL
+          description: ISO-3166-1 alpha-2 country code for cluster selection.
+        automatic_wakeup_config:
+          type: object
+          description: Configuration for when the VM should automatically wake up from hibernation
+          properties:
+            http:
+              type: boolean
+              default: true
+              description: Whether the VM should automatically wake up on HTTP requests
+            websocket:
+              type: boolean
+              default: false
+              description: Whether the VM should automatically wake up on WebSocket connections
+    VMCreateSessionRequest:
+      title: VMCreateSessionRequest
       type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            required:
-            - tag_alias_id
-            - team_id
-            - tag_id
-            - namespace
-            - alias
-            properties:
-              tag_alias_id:
-                type: string
-              team_id:
-                type: string
-              tag_id:
-                type: string
-              namespace:
-                type: string
-              alias:
-                type: string
+      required:
+      - session_id
+      - permission
+      properties:
+        session_id:
+          type: string
+          pattern: ^[a-zA-Z0-9_-]+$
+          example: my-session-1
+          description: Unique identifier for the session
+        permission:
+          type: string
+          enum:
+          - read
+          - write
+          example: write
+          description: Permission level for the session
+        git_user_name:
+          type: string
+          description: Git user name to configure for this session
+        git_user_email:
+          type: string
+          description: Git user email to configure for this session
+        git_access_token:
+          type: string
+          description: GitHub token for the session
     VMCreateTagResponse:
       title: VMCreateTagResponse
       type: object
@@ -566,75 +514,20 @@ components:
             properties:
               tag_id:
                 type: string
-    VMListRunningVMsResponse:
-      title: VMListRunningVMsResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
+    Error:
+      title: Error
+      oneOf:
+      - type: string
       - type: object
-        properties:
-          data:
-            type: object
-            required:
-            - vms
-            - concurrent_vm_count
-            - concurrent_vm_limit
-            properties:
-              vms:
-                type: array
-                items:
-                  type: object
-                  required:
-                  - id
-                  - last_active_at
-                  - session_started_at
-                  - specs
-                  - credit_basis
-                  properties:
-                    id:
-                      type: string
-                    last_active_at:
-                      type: string
-                      format: date-time
-                    session_started_at:
-                      type: string
-                      format: date-time
-                    specs:
-                      type: object
-                      properties:
-                        cpu:
-                          type: integer
-                        memory:
-                          type: integer
-                        storage:
-                          type: integer
-                    credit_basis:
-                      type: string
-              concurrent_vm_count:
-                type: integer
-              concurrent_vm_limit:
-                type: integer
-    VMShutdownResponse:
-      title: VMShutdownResponse
+        additionalProperties: true
+    VMShutdownRequest:
+      title: VMShutdownRequest
       type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            properties: {}
-    VMCreateTagRequest:
-      title: VMCreateTagRequest
-      description: Create a tag for a list of VM IDs
+      properties: {}
+    VMHibernateRequest:
+      title: VMHibernateRequest
       type: object
-      required:
-      - vm_ids
-      properties:
-        vm_ids:
-          type: array
-          items:
-            type: string
+      properties: {}
     VMStartResponse:
       title: VMStartResponse
       type: object
@@ -686,6 +579,16 @@ components:
                 type: string
               pint_token:
                 type: string
+    VMHibernateResponse:
+      title: VMHibernateResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties: {}
     VMUpdateSpecsResponse:
       title: VMUpdateSpecsResponse
       type: object
@@ -703,8 +606,20 @@ components:
                 type: string
               tier:
                 type: string
-    VMHibernateResponse:
-      title: VMHibernateResponse
+    VMUpdateHibernationTimeoutRequest:
+      title: VMUpdateHibernationTimeoutRequest
+      type: object
+      required:
+      - hibernation_timeout_seconds
+      properties:
+        hibernation_timeout_seconds:
+          type: integer
+          minimum: 1
+          maximum: 86400
+          example: 300
+          description: The new hibernation timeout in seconds.
+    VMAssignTagAliasResponse:
+      title: VMAssignTagAliasResponse
       type: object
       allOf:
       - $ref: '#/components/schemas/Response'
@@ -712,7 +627,23 @@ components:
         properties:
           data:
             type: object
-            properties: {}
+            required:
+            - tag_alias_id
+            - team_id
+            - tag_id
+            - namespace
+            - alias
+            properties:
+              tag_alias_id:
+                type: string
+              team_id:
+                type: string
+              tag_id:
+                type: string
+              namespace:
+                type: string
+              alias:
+                type: string
     VMCreateSessionResponse:
       title: VMCreateSessionResponse
       type: object
@@ -750,6 +681,37 @@ components:
               permissions:
                 type: object
                 description: The permissions of the current session
+    VMDeleteResponse:
+      title: VMDeleteResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties: {}
+    VMShutdownResponse:
+      title: VMShutdownResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties: {}
+    VMCreateTagRequest:
+      title: VMCreateTagRequest
+      description: Create a tag for a list of VM IDs
+      type: object
+      required:
+      - vm_ids
+      properties:
+        vm_ids:
+          type: array
+          items:
+            type: string
     VMAssignTagAliasRequest:
       title: VMAssignTagAliasRequest
       description: Assign a tag alias to a VM
@@ -759,6 +721,72 @@ components:
       properties:
         tag_id:
           type: string
+    VMListRunningVMsResponse:
+      title: VMListRunningVMsResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - vms
+            - concurrent_vm_count
+            - concurrent_vm_limit
+            properties:
+              vms:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - id
+                  - last_active_at
+                  - session_started_at
+                  - specs
+                  - credit_basis
+                  properties:
+                    id:
+                      type: string
+                    last_active_at:
+                      type: string
+                      format: date-time
+                    session_started_at:
+                      type: string
+                      format: date-time
+                    specs:
+                      type: object
+                      properties:
+                        cpu:
+                          type: integer
+                        memory:
+                          type: integer
+                        storage:
+                          type: integer
+                    credit_basis:
+                      type: string
+              concurrent_vm_count:
+                type: integer
+              concurrent_vm_limit:
+                type: integer
+    VMUpdateSpecsRequest:
+      title: VMUpdateSpecsRequest
+      type: object
+      required:
+      - tier
+      properties:
+        tier:
+          type: string
+          enum:
+          - Pico
+          - Nano
+          - Micro
+          - Small
+          - Medium
+          - Large
+          - XLarge
+          example: Micro
+          description: Determines which specs to update the VM with.
     Response:
       title: Response
       type: object
@@ -769,34 +797,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Error'
-    VMCreateSessionRequest:
-      title: VMCreateSessionRequest
-      type: object
-      required:
-      - session_id
-      - permission
-      properties:
-        session_id:
-          type: string
-          pattern: ^[a-zA-Z0-9_-]+$
-          example: my-session-1
-          description: Unique identifier for the session
-        permission:
-          type: string
-          enum:
-          - read
-          - write
-          example: write
-          description: Permission level for the session
-        git_user_name:
-          type: string
-          description: Git user name to configure for this session
-        git_user_email:
-          type: string
-          description: Git user email to configure for this session
-        git_access_token:
-          type: string
-          description: GitHub token for the session
   securitySchemes:
     authorization:
       type: http

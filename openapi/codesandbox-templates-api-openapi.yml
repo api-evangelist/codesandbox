@@ -40,40 +40,12 @@ paths:
         - template:create
 components:
   schemas:
-    Response:
-      title: Response
-      type: object
-      properties:
-        success:
-          type: boolean
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    TemplateCreateRequest:
-      title: TemplateCreateRequest
-      type: object
-      required:
-      - forkOf
-      properties:
-        forkOf:
-          type: string
-          example: pt_1234567890
-          description: Short ID of the sandbox to fork.
-        title:
-          type: string
-          maxLength: 255
-          description: Template title. Maximum 255 characters.
-        description:
-          type: string
-          maxLength: 255
-          description: Template description. Maximum 255 characters.
-        tags:
-          type: array
-          items:
-            type: string
-          default: []
-          description: Tags to set on the new sandbox.
+    Error:
+      title: Error
+      oneOf:
+      - type: string
+      - type: object
+        additionalProperties: true
     TemplateCreateResponse:
       title: TemplateCreateResponse
       type: object
@@ -101,12 +73,40 @@ components:
                       type: string
                     cluster:
                       type: string
-    Error:
-      title: Error
-      oneOf:
-      - type: string
-      - type: object
-        additionalProperties: true
+    TemplateCreateRequest:
+      title: TemplateCreateRequest
+      type: object
+      required:
+      - forkOf
+      properties:
+        forkOf:
+          type: string
+          example: pt_1234567890
+          description: Short ID of the sandbox to fork.
+        title:
+          type: string
+          maxLength: 255
+          description: Template title. Maximum 255 characters.
+        description:
+          type: string
+          maxLength: 255
+          description: Template description. Maximum 255 characters.
+        tags:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Tags to set on the new sandbox.
+    Response:
+      title: Response
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     authorization:
       type: http

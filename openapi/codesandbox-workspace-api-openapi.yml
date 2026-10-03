@@ -40,6 +40,23 @@ paths:
         - workspace:create
 components:
   schemas:
+    WorkspaceCreateResponse:
+      title: WorkspaceCreateResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - id
+            - name
+            properties:
+              id:
+                type: string
+              name:
+                type: string
     WorkspaceCreateRequest:
       title: WorkspaceCreateRequest
       type: object
@@ -60,23 +77,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Error'
-    WorkspaceCreateResponse:
-      title: WorkspaceCreateResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            required:
-            - id
-            - name
-            properties:
-              id:
-                type: string
-              name:
-                type: string
     Error:
       title: Error
       oneOf:
