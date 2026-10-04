@@ -134,80 +134,6 @@ paths:
         - preview_token:manage
 components:
   schemas:
-    PreviewTokenCreateRequest:
-      title: PreviewTokenCreateRequest
-      type: object
-      properties:
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: UTC Timestamp until when this token is valid. Omitting this field will create a token without an expiry.
-    PreviewTokenUpdateRequest:
-      title: PreviewTokenUpdateRequest
-      type: object
-      properties:
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: UTC Timestamp until when this token is valid.
-    Error:
-      title: Error
-      oneOf:
-      - type: string
-      - type: object
-        additionalProperties: true
-    PreviewToken:
-      title: PreviewToken
-      type: object
-      required:
-      - expires_at
-      - last_used_at
-      - token_id
-      - token_prefix
-      properties:
-        token_id:
-          type: string
-        token_prefix:
-          type: string
-        expires_at:
-          type:
-          - string
-          - 'null'
-        last_used_at:
-          type:
-          - string
-          - 'null'
-    PreviewTokenUpdateResponse:
-      title: PreviewTokenUpdateResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            required:
-            - sandbox_id
-            - token
-            properties:
-              sandbox_id:
-                type: string
-              token:
-                $ref: '#/components/schemas/PreviewToken'
-    PreviewTokenRevokeAllResponse:
-      title: PreviewTokenRevokeAllResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            properties: {}
     PreviewTokenCreateResponse:
       title: PreviewTokenCreateResponse
       type: object
@@ -232,6 +158,16 @@ components:
                   properties:
                     token:
                       type: string
+    PreviewTokenCreateRequest:
+      title: PreviewTokenCreateRequest
+      type: object
+      properties:
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: UTC Timestamp until when this token is valid. Omitting this field will create a token without an expiry.
     Response:
       title: Response
       type: object
@@ -242,6 +178,33 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Error'
+    PreviewTokenRevokeAllResponse:
+      title: PreviewTokenRevokeAllResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties: {}
+    PreviewTokenUpdateResponse:
+      title: PreviewTokenUpdateResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - sandbox_id
+            - token
+            properties:
+              sandbox_id:
+                type: string
+              token:
+                $ref: '#/components/schemas/PreviewToken'
     PreviewTokenListResponse:
       title: PreviewTokenListResponse
       type: object
@@ -261,6 +224,43 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/PreviewToken'
+    PreviewToken:
+      title: PreviewToken
+      type: object
+      required:
+      - expires_at
+      - last_used_at
+      - token_id
+      - token_prefix
+      properties:
+        token_id:
+          type: string
+        token_prefix:
+          type: string
+        expires_at:
+          type:
+          - string
+          - 'null'
+        last_used_at:
+          type:
+          - string
+          - 'null'
+    Error:
+      title: Error
+      oneOf:
+      - type: string
+      - type: object
+        additionalProperties: true
+    PreviewTokenUpdateRequest:
+      title: PreviewTokenUpdateRequest
+      type: object
+      properties:
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: UTC Timestamp until when this token is valid.
   securitySchemes:
     authorization:
       type: http

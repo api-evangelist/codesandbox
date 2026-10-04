@@ -57,16 +57,12 @@ components:
                 type: string
               name:
                 type: string
-    WorkspaceCreateRequest:
-      title: WorkspaceCreateRequest
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          maxLength: 64
-          description: Name for the new workspace. Maximum length 64 characters.
+    Error:
+      title: Error
+      oneOf:
+      - type: string
+      - type: object
+        additionalProperties: true
     Response:
       title: Response
       type: object
@@ -77,12 +73,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Error'
-    Error:
-      title: Error
-      oneOf:
-      - type: string
-      - type: object
-        additionalProperties: true
+    WorkspaceCreateRequest:
+      title: WorkspaceCreateRequest
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          maxLength: 64
+          description: Name for the new workspace. Maximum length 64 characters.
   securitySchemes:
     authorization:
       type: http
