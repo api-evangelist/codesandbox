@@ -1,0 +1,27 @@
+generated: '2026-10-14'
+method: searched
+checked:
+- https://marketplace.visualstudio.com/vscode
+marketplace_apps: []
+edges:
+- partner_name: Visual Studio Code Marketplace
+  partner: vs-code-marketplace
+  partner_match: aggregator
+  type: marketplace
+  marketplace: vscode
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://marketplace.visualstudio.com/publishers/CodeSandbox-io
+  listing_count: 2
+  apps:
+  - CodeSandbox (Deprecated)
+  - CodeSandbox Theme
+  publisher_name: CodeSandbox
+  badges:
+  - Verified publisher
+  - Verified domain
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+source:
+- https://marketplace.visualstudio.com/vscode
