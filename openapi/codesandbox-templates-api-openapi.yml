@@ -40,6 +40,16 @@ paths:
         - template:create
 components:
   schemas:
+    Response:
+      title: Response
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     TemplateCreateResponse:
       title: TemplateCreateResponse
       type: object
@@ -67,22 +77,6 @@ components:
                       type: string
                     cluster:
                       type: string
-    Error:
-      title: Error
-      oneOf:
-      - type: string
-      - type: object
-        additionalProperties: true
-    Response:
-      title: Response
-      type: object
-      properties:
-        success:
-          type: boolean
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     TemplateCreateRequest:
       title: TemplateCreateRequest
       type: object
@@ -107,6 +101,12 @@ components:
             type: string
           default: []
           description: Tags to set on the new sandbox.
+    Error:
+      title: Error
+      oneOf:
+      - type: string
+      - type: object
+        additionalProperties: true
   securitySchemes:
     authorization:
       type: http

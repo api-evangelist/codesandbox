@@ -86,6 +86,104 @@ paths:
         - token:manage
 components:
   schemas:
+    TokenCreateResponse:
+      title: TokenCreateResponse
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Response'
+      - type: object
+        properties:
+          data:
+            type: object
+            required:
+            - description
+            - expires_at
+            - scopes
+            - team_id
+            - token
+            - token_id
+            properties:
+              token_id:
+                type: string
+              team_id:
+                type: string
+              token:
+                type: string
+              description:
+                type:
+                - string
+                - 'null'
+              scopes:
+                type: array
+                items:
+                  type: string
+              expires_at:
+                type:
+                - string
+                - 'null'
+    TokenCreateRequest:
+      title: TokenCreateRequest
+      type: object
+      properties:
+        description:
+          type: string
+          maxLength: 255
+          description: Description of this token.
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: UTC Timestamp until when this token is valid.
+        scopes:
+          type: array
+          items:
+            enum:
+            - sandbox_create
+            - sandbox_edit_code
+            - sandbox_read
+            - vm_manage
+          description: Which scopes to grant this token.
+        default_version:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: API Version to use, formatted as YYYY-MM-DD.
+    Error:
+      title: Error
+      oneOf:
+      - type: string
+      - type: object
+        additionalProperties: true
+    TokenUpdateRequest:
+      title: TokenUpdateRequest
+      description: Updateable fields for API Tokens.
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        scopes:
+          type: array
+          items:
+            enum:
+            - sandbox_create
+            - sandbox_edit_code
+            - sandbox_read
+            - vm_manage
+        default_version:
+          type:
+          - string
+          - 'null'
+          format: date
     TokenUpdateResponse:
       title: TokenUpdateResponse
       type: object
@@ -128,104 +226,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Error'
-    TokenCreateRequest:
-      title: TokenCreateRequest
-      type: object
-      properties:
-        description:
-          type: string
-          maxLength: 255
-          description: Description of this token.
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: UTC Timestamp until when this token is valid.
-        scopes:
-          type: array
-          items:
-            enum:
-            - sandbox_create
-            - sandbox_edit_code
-            - sandbox_read
-            - vm_manage
-          description: Which scopes to grant this token.
-        default_version:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: API Version to use, formatted as YYYY-MM-DD.
-    TokenCreateResponse:
-      title: TokenCreateResponse
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Response'
-      - type: object
-        properties:
-          data:
-            type: object
-            required:
-            - description
-            - expires_at
-            - scopes
-            - team_id
-            - token
-            - token_id
-            properties:
-              token_id:
-                type: string
-              team_id:
-                type: string
-              token:
-                type: string
-              description:
-                type:
-                - string
-                - 'null'
-              scopes:
-                type: array
-                items:
-                  type: string
-              expires_at:
-                type:
-                - string
-                - 'null'
-    Error:
-      title: Error
-      oneOf:
-      - type: string
-      - type: object
-        additionalProperties: true
-    TokenUpdateRequest:
-      title: TokenUpdateRequest
-      description: Updateable fields for API Tokens.
-      type: object
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        scopes:
-          type: array
-          items:
-            enum:
-            - sandbox_create
-            - sandbox_edit_code
-            - sandbox_read
-            - vm_manage
-        default_version:
-          type:
-          - string
-          - 'null'
-          format: date
   securitySchemes:
     authorization:
       type: http

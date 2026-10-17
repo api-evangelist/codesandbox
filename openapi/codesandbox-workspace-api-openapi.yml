@@ -40,6 +40,26 @@ paths:
         - workspace:create
 components:
   schemas:
+    Response:
+      title: Response
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    WorkspaceCreateRequest:
+      title: WorkspaceCreateRequest
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          maxLength: 64
+          description: Name for the new workspace. Maximum length 64 characters.
     WorkspaceCreateResponse:
       title: WorkspaceCreateResponse
       type: object
@@ -63,26 +83,6 @@ components:
       - type: string
       - type: object
         additionalProperties: true
-    Response:
-      title: Response
-      type: object
-      properties:
-        success:
-          type: boolean
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    WorkspaceCreateRequest:
-      title: WorkspaceCreateRequest
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          maxLength: 64
-          description: Name for the new workspace. Maximum length 64 characters.
   securitySchemes:
     authorization:
       type: http
