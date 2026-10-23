@@ -319,6 +319,8 @@ apis:
   - type: JSONLDContext
     url: json-ld/codesandbox-context.jsonld
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/codesandbox/overview
   - type: IssueTracker
     url: https://github.com/codesandbox/sandpack/issues
   - type: Releases
