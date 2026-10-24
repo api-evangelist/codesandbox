@@ -1,0 +1,349 @@
+{
+  "info": {
+    "_postman_id": "eeec9f6d-3cad-4844-892f-5dc0b4ea11ab",
+    "name": "CodeSandbox Preview Host API",
+    "description": "The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:51:34.000Z",
+    "updatedAt": "2026-10-21T20:51:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-eeec9f6d-3cad-4844-892f-5dc0b4ea11ab"
+  },
+  "item": [
+    {
+      "name": "workspace",
+      "item": [
+        {
+          "name": "preview_hosts",
+          "item": [
+            {
+              "name": "List Preview Hosts",
+              "id": "fcb1edfa-c57e-451b-a0f0-2e55a0d7cd6e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/workspace/preview_hosts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "workspace",
+                    "preview_hosts"
+                  ]
+                },
+                "description": "List all trusted preview hosts for the current team"
+              },
+              "response": [
+                {
+                  "id": "bb72227c-c944-4fa7-8847-b37404c624ca",
+                  "name": "Preview Host List Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workspace/preview_hosts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workspace",
+                        "preview_hosts"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": \"<boolean>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": {\n    \"preview_hosts\": [\n      {\n        \"host\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\"\n      },\n      {\n        \"host\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:51:35.000Z",
+                  "updatedAt": "2026-10-21T20:51:35.000Z",
+                  "uid": "35240-bb72227c-c944-4fa7-8847-b37404c624ca"
+                }
+              ],
+              "createdAt": "2026-10-21T20:51:35.000Z",
+              "updatedAt": "2026-10-21T20:51:35.000Z",
+              "uid": "35240-fcb1edfa-c57e-451b-a0f0-2e55a0d7cd6e"
+            },
+            {
+              "name": "Create Preview Hosts",
+              "id": "0a27dba9-8f59-49f5-9296-b4d5d350182a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/workspace/preview_hosts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "workspace",
+                    "preview_hosts"
+                  ]
+                },
+                "description": "Add one or more trusted domains that are allowed to access sandbox previews for this workspace."
+              },
+              "response": [
+                {
+                  "id": "714773d7-2049-4c92-914d-17b4f0c1ab30",
+                  "name": "Preview Host List Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/workspace/preview_hosts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workspace",
+                        "preview_hosts"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": \"<boolean>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": {\n    \"preview_hosts\": [\n      {\n        \"host\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\"\n      },\n      {\n        \"host\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:51:35.000Z",
+                  "updatedAt": "2026-10-21T20:51:35.000Z",
+                  "uid": "35240-714773d7-2049-4c92-914d-17b4f0c1ab30"
+                }
+              ],
+              "createdAt": "2026-10-21T20:51:35.000Z",
+              "updatedAt": "2026-10-21T20:51:35.000Z",
+              "uid": "35240-0a27dba9-8f59-49f5-9296-b4d5d350182a"
+            },
+            {
+              "name": "Update Preview Hosts",
+              "id": "18ea3b8e-daf3-48c6-8d09-6e9b02ba424d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/workspace/preview_hosts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "workspace",
+                    "preview_hosts"
+                  ]
+                },
+                "description": "Replace the list of trusted domains that are allowed to access sandbox previews for this workspace."
+              },
+              "response": [
+                {
+                  "id": "c70e918d-c862-4f76-b2da-3f414608f111",
+                  "name": "Preview Host List Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/workspace/preview_hosts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workspace",
+                        "preview_hosts"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": \"<boolean>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": {\n    \"preview_hosts\": [\n      {\n        \"host\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\"\n      },\n      {\n        \"host\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:51:35.000Z",
+                  "updatedAt": "2026-10-21T20:51:35.000Z",
+                  "uid": "35240-c70e918d-c862-4f76-b2da-3f414608f111"
+                }
+              ],
+              "createdAt": "2026-10-21T20:51:35.000Z",
+              "updatedAt": "2026-10-21T20:51:35.000Z",
+              "uid": "35240-18ea3b8e-daf3-48c6-8d09-6e9b02ba424d"
+            }
+          ],
+          "id": "7366fe27-cd4f-490a-b550-cf3a898377dd",
+          "createdAt": "2026-10-21T20:51:35.000Z",
+          "updatedAt": "2026-10-21T20:51:35.000Z",
+          "uid": "35240-7366fe27-cd4f-490a-b550-cf3a898377dd"
+        }
+      ],
+      "id": "112a7d64-0cb6-4982-9b6f-b52e4a003ba5",
+      "createdAt": "2026-10-21T20:51:35.000Z",
+      "updatedAt": "2026-10-21T20:51:35.000Z",
+      "uid": "35240-112a7d64-0cb6-4982-9b6f-b52e4a003ba5"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.codesandbox.io"
+    }
+  ]
+}

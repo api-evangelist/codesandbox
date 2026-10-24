@@ -1,401 +1,427 @@
 {
+  "info": {
+    "_postman_id": "19e476b0-227c-4eaf-bb1e-4100a6726d9c",
+    "name": "CodeSandbox Sandbox API",
+    "description": "The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:51:52.000Z",
+    "updatedAt": "2026-10-21T20:51:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-19e476b0-227c-4eaf-bb1e-4100a6726d9c"
+  },
   "item": [
     {
-      "id": "d0f10f70-f2cc-47a3-a839-2cf55eab3012",
       "name": "sandbox",
-      "description": {
-        "content": "Browser and VM sandbox management",
-        "type": "text/plain"
-      },
       "item": [
         {
-          "id": "061606c1-c01c-4003-9cd3-d548fae87fed",
-          "name": "List Sandboxes",
-          "request": {
-            "name": "List Sandboxes",
-            "description": {
-              "content": "List sandboxes from the current workspace with optional filters.\nResults are limited to a maximum of 50 sandboxes per request.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "sandbox"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "tags",
-                  "value": "<string>",
-                  "description": "Comma-separated list of tags to filter by"
-                },
-                {
-                  "disabled": false,
-                  "key": "order_by",
-                  "value": "updated_at",
-                  "description": "Field to order results by"
-                },
-                {
-                  "disabled": false,
-                  "key": "direction",
-                  "value": "desc",
-                  "description": "Order direction"
-                },
-                {
-                  "disabled": false,
-                  "key": "page_size",
-                  "value": "20",
-                  "description": "Maximum number of sandboxes to return in a single response"
-                },
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "1",
-                  "description": "Page number to return"
-                },
-                {
-                  "disabled": false,
-                  "key": "status",
-                  "value": "<string>",
-                  "description": "If true, only returns VMs for which a heartbeat was received in the last 30 seconds."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "{id}",
+          "item": [
             {
-              "id": "810762fe-3f52-4925-8f1d-93285a420c2c",
-              "name": "Sandbox List Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "sandbox"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "tags",
-                      "value": "sha-123,feature-x"
+              "name": "fork",
+              "item": [
+                {
+                  "name": "Fork a Sandbox",
+                  "id": "24f9a5eb-3943-4e8d-ae14-b87d6bc3fdf9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
                     },
-                    {
-                      "key": "order_by",
-                      "value": "updated_at"
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"privacy\": 0,\n  \"is_frozen\": false,\n  \"private_preview\": \"<boolean>\",\n  \"path\": \"/\",\n  \"start_options\": {\n    \"tier\": \"XLarge\",\n    \"hibernation_timeout_seconds\": \"<integer>\",\n    \"ipcountry\": \"WJ\",\n    \"automatic_wakeup_config\": {\n      \"http\": true,\n      \"websocket\": false\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
                     },
-                    {
-                      "key": "direction",
-                      "value": "desc"
+                    "url": {
+                      "raw": "{{baseUrl}}/sandbox/:id/fork",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sandbox",
+                        ":id",
+                        "fork"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1bdeb8f3-d48c-4b05-b485-164db49066e3",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Short ID of the sandbox to fork"
+                        }
+                      ]
                     },
+                    "description": "Fork an existing sandbox to the current workspace"
+                  },
+                  "response": [
                     {
-                      "key": "page_size",
-                      "value": "20"
-                    },
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "status",
-                      "value": "<string>"
+                      "id": "2e0390d8-ffef-454f-bf7f-ad552b5c5427",
+                      "name": "Sandbox Fork Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"privacy\": 0,\n  \"is_frozen\": false,\n  \"private_preview\": \"<boolean>\",\n  \"path\": \"/\",\n  \"start_options\": {\n    \"tier\": \"XLarge\",\n    \"hibernation_timeout_seconds\": \"<integer>\",\n    \"ipcountry\": \"WJ\",\n    \"automatic_wakeup_config\": {\n      \"http\": true,\n      \"websocket\": false\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/sandbox/:id/fork",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "sandbox",
+                            ":id",
+                            "fork"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"success\": \"<boolean>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": {\n    \"alias\": \"<string>\",\n    \"id\": \"<string>\",\n    \"title\": \"<string,null>\",\n    \"start_response\": \"<object,null>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:51:53.000Z",
+                      "updatedAt": "2026-10-21T20:51:53.000Z",
+                      "uid": "35240-2e0390d8-ffef-454f-bf7f-ad552b5c5427"
                     }
                   ],
-                  "variable": []
+                  "createdAt": "2026-10-21T20:51:52.000Z",
+                  "updatedAt": "2026-10-21T20:51:52.000Z",
+                  "uid": "35240-24f9a5eb-3943-4e8d-ae14-b87d6bc3fdf9"
+                }
+              ],
+              "id": "a247adbb-4038-4bdf-9dd1-074815c2d9f3",
+              "createdAt": "2026-10-21T20:51:52.000Z",
+              "updatedAt": "2026-10-21T20:51:52.000Z",
+              "uid": "35240-a247adbb-4038-4bdf-9dd1-074815c2d9f3"
+            },
+            {
+              "name": "Get a Sandbox",
+              "id": "cfded779-a5e0-44c4-812e-4429f7108b1e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
                 "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"success\": false,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {\n    \"sandboxes\": [\n      {\n        \"id\": \"string\",\n        \"privacy\": 510,\n        \"is_frozen\": true,\n        \"created_at\": \"1993-02-24T13:58:20.471Z\",\n        \"updated_at\": \"1978-09-26T06:36:23.385Z\",\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"settings\": {\n          \"use_pint\": false\n        },\n        \"title\": \"string\",\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"privacy\": 3136,\n        \"is_frozen\": true,\n        \"created_at\": \"2008-09-03T07:44:31.383Z\",\n        \"updated_at\": \"1972-05-11T14:52:44.334Z\",\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"settings\": {\n          \"use_pint\": true\n        },\n        \"title\": \"string\",\n        \"description\": \"string\"\n      }\n    ],\n    \"pagination\": {\n      \"total_records\": 527,\n      \"current_page\": 9464,\n      \"next_page\": 4382\n    }\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a8dbf207-d78a-42f2-a437-8fd2ec6f4d8a",
-          "name": "Create a Sandbox",
-          "request": {
-            "name": "Create a Sandbox",
-            "description": {
-              "content": "Create a new sandbox in the current workspace with file contents\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "sandbox"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"files\": {\n    \"key_0\": {\n      \"code\": \"<string>\",\n      \"binary_content\": \"<string>\",\n      \"is_binary\": false\n    },\n    \"key_1\": {\n      \"code\": \"<string>\",\n      \"binary_content\": \"<string>\",\n      \"is_binary\": false\n    },\n    \"key_2\": {\n      \"code\": \"<string>\",\n      \"binary_content\": \"<string>\",\n      \"is_binary\": false\n    },\n    \"key_3\": {\n      \"code\": \"<string>\",\n      \"binary_content\": \"<string>\",\n      \"is_binary\": false\n    }\n  },\n  \"title\": \"\",\n  \"description\": \"<string>\",\n  \"template\": \"<string>\",\n  \"entry\": \"<string>\",\n  \"runtime\": \"browser\",\n  \"privacy\": 0,\n  \"is_frozen\": false,\n  \"private_preview\": \"<boolean>\",\n  \"external_resources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"npm_dependencies\": {\n    \"key_0\": \"<string>\"\n  },\n  \"path\": \"/\",\n  \"settings\": {\n    \"use_pint\": \"<boolean>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "577a746a-9724-488b-a6eb-ee524c3678ea",
-              "name": "Sandbox Create Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "sandbox"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"files\": {\n    \"key_0\": {\n      \"code\": \"<string>\",\n      \"binary_content\": \"<string>\",\n      \"is_binary\": false\n    },\n    \"key_1\": {\n      \"code\": \"<string>\",\n      \"binary_content\": \"<string>\",\n      \"is_binary\": false\n    }\n  },\n  \"title\": \"\",\n  \"description\": \"<string>\",\n  \"template\": \"<string>\",\n  \"entry\": \"<string>\",\n  \"runtime\": \"browser\",\n  \"privacy\": 0,\n  \"is_frozen\": false,\n  \"private_preview\": \"<boolean>\",\n  \"external_resources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"npm_dependencies\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"path\": \"/\",\n  \"settings\": {\n    \"use_pint\": \"<boolean>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"success\": false,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {\n    \"alias\": \"string\",\n    \"id\": \"string\",\n    \"title\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "554080a0-edbd-4068-af45-24cbd4be8fd0",
-          "name": "Get a Sandbox",
-          "request": {
-            "name": "Get a Sandbox",
-            "description": {
-              "content": "Retrieve a sandbox by its ID\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "sandbox",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Short ID of the sandbox to retrieve"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "0fc66032-2985-42d5-bdee-8d343e27b1ea",
-              "name": "Sandbox Get Response",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/sandbox/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "sandbox",
                     ":id"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "bf816328-00be-435d-912f-d87b51ace209",
                       "key": "id",
+                      "value": "<string>",
                       "description": "(Required) Short ID of the sandbox to retrieve"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                "description": "Retrieve a sandbox by its ID"
+              },
+              "response": [
+                {
+                  "id": "0a9f0d75-fdb1-4229-a91d-78407f0cccd7",
+                  "name": "Sandbox Get Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/sandbox/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sandbox",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
                   },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": \"<boolean>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": {\n    \"id\": \"<string>\",\n    \"privacy\": \"<integer>\",\n    \"is_frozen\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"settings\": {\n      \"use_pint\": \"<boolean>\"\n    },\n    \"title\": \"<string,null>\",\n    \"description\": \"<string,null>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:51:53.000Z",
+                  "updatedAt": "2026-10-21T20:51:53.000Z",
+                  "uid": "35240-0a9f0d75-fdb1-4229-a91d-78407f0cccd7"
+                }
+              ],
+              "createdAt": "2026-10-21T20:51:52.000Z",
+              "updatedAt": "2026-10-21T20:51:52.000Z",
+              "uid": "35240-cfded779-a5e0-44c4-812e-4429f7108b1e"
+            }
+          ],
+          "id": "be574c2e-f1ab-495a-a4bc-9fa4a0262e3c",
+          "createdAt": "2026-10-21T20:51:52.000Z",
+          "updatedAt": "2026-10-21T20:51:52.000Z",
+          "uid": "35240-be574c2e-f1ab-495a-a4bc-9fa4a0262e3c"
+        },
+        {
+          "name": "List Sandboxes",
+          "id": "71a11002-11ed-4f4a-865f-15fd5ced6dd6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/sandbox?tags=<string>&order_by=updated_at&direction=desc&page_size=20&page=1&status=running",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sandbox"
+              ],
+              "query": [
+                {
+                  "description": "Comma-separated list of tags to filter by",
+                  "key": "tags",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Field to order results by",
+                  "key": "order_by",
+                  "value": "updated_at"
+                },
+                {
+                  "description": "Order direction",
+                  "key": "direction",
+                  "value": "desc"
+                },
+                {
+                  "description": "Maximum number of sandboxes to return in a single response",
+                  "key": "page_size",
+                  "value": "20"
+                },
+                {
+                  "description": "Page number to return",
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "If true, only returns VMs for which a heartbeat was received in the last 30 seconds.",
+                  "key": "status",
+                  "value": "running"
+                }
+              ]
+            },
+            "description": "List sandboxes from the current workspace with optional filters.\nResults are limited to a maximum of 50 sandboxes per request."
+          },
+          "response": [
+            {
+              "id": "1cf7f936-def9-4fe0-9308-b2e952878bd5",
+              "name": "Sandbox List Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/sandbox?tags=<string>&order_by=updated_at&direction=desc&page_size=20&page=1&status=running",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sandbox"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated list of tags to filter by",
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Field to order results by",
+                      "key": "order_by",
+                      "value": "updated_at"
+                    },
+                    {
+                      "description": "Order direction",
+                      "key": "direction",
+                      "value": "desc"
+                    },
+                    {
+                      "description": "Maximum number of sandboxes to return in a single response",
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Page number to return",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "If true, only returns VMs for which a heartbeat was received in the last 30 seconds.",
+                      "key": "status",
+                      "value": "running"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"success\": false,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {\n    \"id\": \"string\",\n    \"privacy\": 4156,\n    \"is_frozen\": false,\n    \"created_at\": \"1947-02-13T15:52:04.561Z\",\n    \"updated_at\": \"1980-10-20T21:58:49.372Z\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"settings\": {\n      \"use_pint\": false\n    },\n    \"title\": \"string\",\n    \"description\": \"string\"\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": {\n    \"sandboxes\": [\n      {\n        \"id\": \"<string>\",\n        \"privacy\": \"<integer>\",\n        \"is_frozen\": \"<boolean>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"settings\": {\n          \"use_pint\": \"<boolean>\"\n        },\n        \"title\": \"<string,null>\",\n        \"description\": \"<string,null>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"privacy\": \"<integer>\",\n        \"is_frozen\": \"<boolean>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"settings\": {\n          \"use_pint\": \"<boolean>\"\n        },\n        \"title\": \"<string,null>\",\n        \"description\": \"<string,null>\"\n      }\n    ],\n    \"pagination\": {\n      \"total_records\": \"<integer>\",\n      \"current_page\": \"<integer>\",\n      \"next_page\": \"<integer,null>\"\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:51:53.000Z",
+              "updatedAt": "2026-10-21T20:51:53.000Z",
+              "uid": "35240-1cf7f936-def9-4fe0-9308-b2e952878bd5"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:51:52.000Z",
+          "updatedAt": "2026-10-21T20:51:52.000Z",
+          "uid": "35240-71a11002-11ed-4f4a-865f-15fd5ced6dd6"
         },
         {
-          "id": "8dca06f8-e6dc-4d00-92c7-5504abbb180a",
-          "name": "Fork a Sandbox",
+          "name": "Create a Sandbox",
+          "id": "fa328b07-e170-4fb9-bce6-0593bb51267a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Fork a Sandbox",
-            "description": {
-              "content": "Fork an existing sandbox to the current workspace\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "sandbox",
-                ":id",
-                "fork"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Short ID of the sandbox to fork"
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
                 }
               ]
             },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -406,113 +432,100 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"privacy\": 0,\n  \"is_frozen\": false,\n  \"private_preview\": \"<boolean>\",\n  \"path\": \"/\",\n  \"start_options\": {\n    \"tier\": \"<string>\",\n    \"hibernation_timeout_seconds\": \"<integer>\",\n    \"ipcountry\": \"<string>\",\n    \"automatic_wakeup_config\": {\n      \"http\": true,\n      \"websocket\": false\n    }\n  }\n}",
+              "raw": "{\n  \"files\": {\n    \"anim_6\": {\n      \"code\": \"<string>\",\n      \"binary_content\": \"<string>\",\n      \"is_binary\": false\n    }\n  },\n  \"title\": \"\",\n  \"description\": \"<string>\",\n  \"template\": \"<string>\",\n  \"entry\": \"<string>\",\n  \"runtime\": \"browser\",\n  \"privacy\": 0,\n  \"is_frozen\": false,\n  \"private_preview\": \"<boolean>\",\n  \"external_resources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"npm_dependencies\": {\n    \"veniam_6fe\": \"<string>\",\n    \"proident5a\": \"<string>\",\n    \"ut78\": \"<string>\"\n  },\n  \"path\": \"/\",\n  \"settings\": {\n    \"use_pint\": \"<boolean>\"\n  }\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sandbox",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sandbox"
+              ]
+            },
+            "description": "Create a new sandbox in the current workspace with file contents"
           },
           "response": [
             {
-              "id": "52700c97-b028-4816-a07f-453d52af5bdd",
-              "name": "Sandbox Fork Response",
+              "id": "4e3a1403-563a-436f-bd03-4f3dd74451f4",
+              "name": "Sandbox Create Response",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "sandbox",
-                    ":id",
-                    "fork"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Short ID of the sandbox to fork"
-                    }
-                  ]
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"privacy\": 0,\n  \"is_frozen\": false,\n  \"private_preview\": \"<boolean>\",\n  \"path\": \"/\",\n  \"start_options\": {\n    \"tier\": \"Micro\",\n    \"hibernation_timeout_seconds\": 300,\n    \"ipcountry\": \"NL\",\n    \"automatic_wakeup_config\": {\n      \"http\": true,\n      \"websocket\": false\n    }\n  }\n}",
+                  "raw": "{\n  \"files\": {\n    \"anim_6\": {\n      \"code\": \"<string>\",\n      \"binary_content\": \"<string>\",\n      \"is_binary\": false\n    }\n  },\n  \"title\": \"\",\n  \"description\": \"<string>\",\n  \"template\": \"<string>\",\n  \"entry\": \"<string>\",\n  \"runtime\": \"browser\",\n  \"privacy\": 0,\n  \"is_frozen\": false,\n  \"private_preview\": \"<boolean>\",\n  \"external_resources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"npm_dependencies\": {\n    \"veniam_6fe\": \"<string>\",\n    \"proident5a\": \"<string>\",\n    \"ut78\": \"<string>\"\n  },\n  \"path\": \"/\",\n  \"settings\": {\n    \"use_pint\": \"<boolean>\"\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sandbox",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sandbox"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"success\": false,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {\n    \"alias\": \"string\",\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"start_response\": {}\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": {\n    \"alias\": \"<string>\",\n    \"id\": \"<string>\",\n    \"title\": \"<string,null>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:51:53.000Z",
+              "updatedAt": "2026-10-21T20:51:53.000Z",
+              "uid": "35240-4e3a1403-563a-436f-bd03-4f3dd74451f4"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:51:52.000Z",
+          "updatedAt": "2026-10-21T20:51:52.000Z",
+          "uid": "35240-fa328b07-e170-4fb9-bce6-0593bb51267a"
         }
       ],
-      "event": []
+      "id": "f1d82d37-0278-46fd-aa27-7bf310c013b9",
+      "createdAt": "2026-10-21T20:51:52.000Z",
+      "updatedAt": "2026-10-21T20:51:52.000Z",
+      "uid": "35240-f1d82d37-0278-46fd-aa27-7bf310c013b9"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.codesandbox.io",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://api.codesandbox.io"
     }
-  ],
-  "info": {
-    "_postman_id": "efc36f1f-f1d4-4720-aec8-aa0877468b03",
-    "name": "CodeSandbox meta sandbox API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

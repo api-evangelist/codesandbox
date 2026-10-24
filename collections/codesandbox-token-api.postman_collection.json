@@ -1,306 +1,336 @@
 {
+  "info": {
+    "_postman_id": "a36eb7d7-16c6-4bd0-9497-d668e7abdbfc",
+    "name": "CodeSandbox Token API",
+    "description": "The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:52:05.000Z",
+    "updatedAt": "2026-10-21T20:52:06.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a36eb7d7-16c6-4bd0-9497-d668e7abdbfc"
+  },
   "item": [
     {
-      "id": "8b99ce1e-2d93-42c2-bdc2-34ebc6eddd41",
-      "name": "token",
-      "description": {
-        "content": "API token management",
-        "type": "text/plain"
-      },
+      "name": "org",
       "item": [
         {
-          "id": "06d63123-e2c8-4d72-afd9-706e33b53b9c",
-          "name": "Create an API Token",
-          "request": {
-            "name": "Create an API Token",
-            "description": {
-              "content": "Create a new API token for a workspace that is part of the current organization.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "org",
-                "workspace",
-                ":team_id",
-                "tokens"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "team_id",
-                  "description": "(Required) ID of the workspace to create the token in"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"description\": \"<string>\",\n  \"expires_at\": \"<dateTime>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"default_version\": \"<date>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "workspace",
+          "item": [
             {
-              "id": "d07138fc-e253-4e9f-96ac-704c95ba61d8",
-              "name": "Token Create Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "org",
-                    "workspace",
-                    ":team_id",
-                    "tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "team_id",
-                      "description": "(Required) ID of the workspace to create the token in"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"expires_at\": \"<dateTime>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"default_version\": \"<date>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
+              "name": "{team_id}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "tokens",
+                  "item": [
+                    {
+                      "name": "{token_id}",
+                      "item": [
+                        {
+                          "name": "Update an API Token",
+                          "id": "92c434cf-dc98-40f6-aac5-5be73c071310",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"description\": \"<string,null>\",\n  \"expires_at\": \"<string,null-date-time>\",\n  \"scopes\": [\n    \"vm_manage\",\n    \"sandbox_read\"\n  ],\n  \"default_version\": \"<string,null-date>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/org/workspace/:team_id/tokens/:token_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "org",
+                                "workspace",
+                                ":team_id",
+                                "tokens",
+                                ":token_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e336882e-7658-47e2-abf6-b1af5bdc613f",
+                                  "key": "team_id",
+                                  "value": "<string>",
+                                  "description": "(Required) ID of the workspace the token belongs to"
+                                },
+                                {
+                                  "id": "04a853bf-1c9a-4bfb-ae97-739ade44b316",
+                                  "key": "token_id",
+                                  "value": "<string>",
+                                  "description": "(Required) ID of token to update"
+                                }
+                              ]
+                            },
+                            "description": "Update an API token for a workspace that is part of the current organization."
+                          },
+                          "response": [
+                            {
+                              "id": "2dce3ad6-0423-4da3-8d74-b41ef2bc8b38",
+                              "name": "Token Update Response",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"description\": \"<string,null>\",\n  \"expires_at\": \"<string,null-date-time>\",\n  \"scopes\": [\n    \"vm_manage\",\n    \"sandbox_read\"\n  ],\n  \"default_version\": \"<string,null-date>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/org/workspace/:team_id/tokens/:token_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "org",
+                                    "workspace",
+                                    ":team_id",
+                                    "tokens",
+                                    ":token_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "team_id"
+                                    },
+                                    {
+                                      "key": "token_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"success\": \"<boolean>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": {\n    \"description\": \"<string,null>\",\n    \"scopes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"team_id\": \"<string>\",\n    \"token_id\": \"<string>\",\n    \"expires_at\": \"<string,null-date-time>\"\n  }\n}",
+                              "createdAt": "2026-10-21T20:52:06.000Z",
+                              "updatedAt": "2026-10-21T20:52:06.000Z",
+                              "uid": "35240-2dce3ad6-0423-4da3-8d74-b41ef2bc8b38"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:52:06.000Z",
+                          "updatedAt": "2026-10-21T20:52:06.000Z",
+                          "uid": "35240-92c434cf-dc98-40f6-aac5-5be73c071310"
+                        }
+                      ],
+                      "id": "444e5681-080c-4d41-83b5-4e7be2db840d",
+                      "createdAt": "2026-10-21T20:52:06.000Z",
+                      "updatedAt": "2026-10-21T20:52:06.000Z",
+                      "uid": "35240-444e5681-080c-4d41-83b5-4e7be2db840d"
+                    },
+                    {
+                      "name": "Create an API Token",
+                      "id": "fc014536-6a98-4fcb-a3d3-4083eed6efe4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"description\": \"<string>\",\n  \"expires_at\": \"<string,null-date-time>\",\n  \"scopes\": [\n    \"sandbox_read\",\n    \"sandbox_edit_code\"\n  ],\n  \"default_version\": \"<string,null-date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/org/workspace/:team_id/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "org",
+                            "workspace",
+                            ":team_id",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "id": "333086db-54bc-4e01-9e2a-4eb3b3c6858a",
+                              "key": "team_id",
+                              "value": "<string>",
+                              "description": "(Required) ID of the workspace to create the token in"
+                            }
+                          ]
+                        },
+                        "description": "Create a new API token for a workspace that is part of the current organization."
+                      },
+                      "response": [
+                        {
+                          "id": "33abe7a5-78ef-40d0-8b4c-c22b748e51a8",
+                          "name": "Token Create Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"description\": \"<string>\",\n  \"expires_at\": \"<string,null-date-time>\",\n  \"scopes\": [\n    \"sandbox_read\",\n    \"sandbox_edit_code\"\n  ],\n  \"default_version\": \"<string,null-date>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/org/workspace/:team_id/tokens",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "org",
+                                "workspace",
+                                ":team_id",
+                                "tokens"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "team_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"success\": \"<boolean>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": {\n    \"description\": \"<string,null>\",\n    \"expires_at\": \"<string,null>\",\n    \"scopes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"team_id\": \"<string>\",\n    \"token\": \"<string>\",\n    \"token_id\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T20:52:06.000Z",
+                          "updatedAt": "2026-10-21T20:52:06.000Z",
+                          "uid": "35240-33abe7a5-78ef-40d0-8b4c-c22b748e51a8"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:52:06.000Z",
+                      "updatedAt": "2026-10-21T20:52:06.000Z",
+                      "uid": "35240-fc014536-6a98-4fcb-a3d3-4083eed6efe4"
+                    }
+                  ],
+                  "id": "d404d475-48f9-4b53-89c8-3e6c08dda172",
+                  "createdAt": "2026-10-21T20:52:06.000Z",
+                  "updatedAt": "2026-10-21T20:52:06.000Z",
+                  "uid": "35240-d404d475-48f9-4b53-89c8-3e6c08dda172"
                 }
               ],
-              "body": "{\n  \"success\": true,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {\n    \"description\": \"string\",\n    \"expires_at\": \"string\",\n    \"scopes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"team_id\": \"string\",\n    \"token\": \"string\",\n    \"token_id\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "552a3de4-585d-493f-b556-cfce5a563a68",
+              "createdAt": "2026-10-21T20:52:06.000Z",
+              "updatedAt": "2026-10-21T20:52:06.000Z",
+              "uid": "35240-552a3de4-585d-493f-b556-cfce5a563a68"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "5d3d8836-2892-4c04-b40c-f544bb9fd2ed",
-          "name": "Update an API Token",
-          "request": {
-            "name": "Update an API Token",
-            "description": {
-              "content": "Update an API token for a workspace that is part of the current organization.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "org",
-                "workspace",
-                ":team_id",
-                "tokens",
-                ":token_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "team_id",
-                  "description": "(Required) ID of the workspace the token belongs to"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "token_id",
-                  "description": "(Required) ID of token to update"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"description\": \"<string>\",\n  \"expires_at\": \"<dateTime>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"default_version\": \"<date>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "feaf9950-2f70-48be-9c51-812604e54727",
-              "name": "Token Update Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "org",
-                    "workspace",
-                    ":team_id",
-                    "tokens",
-                    ":token_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "team_id",
-                      "description": "(Required) ID of the workspace the token belongs to"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "token_id",
-                      "description": "(Required) ID of token to update"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"expires_at\": \"<dateTime>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"default_version\": \"<date>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"success\": true,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {\n    \"description\": \"string\",\n    \"scopes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"team_id\": \"string\",\n    \"token_id\": \"string\",\n    \"expires_at\": \"1977-08-31T13:39:38.151Z\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "8bcacb35-c126-4130-bba5-84f1c2890b41",
+          "createdAt": "2026-10-21T20:52:06.000Z",
+          "updatedAt": "2026-10-21T20:52:06.000Z",
+          "uid": "35240-8bcacb35-c126-4130-bba5-84f1c2890b41"
         }
       ],
-      "event": []
+      "id": "54f8132c-9856-4aba-a17c-d1ddd9bbcf38",
+      "createdAt": "2026-10-21T20:52:06.000Z",
+      "updatedAt": "2026-10-21T20:52:06.000Z",
+      "uid": "35240-54f8132c-9856-4aba-a17c-d1ddd9bbcf38"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.codesandbox.io",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://api.codesandbox.io"
     }
-  ],
-  "info": {
-    "_postman_id": "06fed579-f575-4ef7-acbf-523c50e67181",
-    "name": "CodeSandbox meta token API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

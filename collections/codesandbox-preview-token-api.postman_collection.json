@@ -1,0 +1,523 @@
+{
+  "info": {
+    "_postman_id": "37c92447-96d8-4f9e-bfec-23b102f94adf",
+    "name": "CodeSandbox Preview Token API",
+    "description": "The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:51:44.000Z",
+    "updatedAt": "2026-10-21T20:51:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-37c92447-96d8-4f9e-bfec-23b102f94adf"
+  },
+  "item": [
+    {
+      "name": "sandbox",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "tokens",
+              "item": [
+                {
+                  "name": "{token_id}",
+                  "item": [
+                    {
+                      "name": "Update a Preview Token",
+                      "id": "8337ecdf-206b-4647-9bdf-60900f32e18e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"expires_at\": \"<string,null-date-time>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/sandbox/:id/tokens/:token_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "sandbox",
+                            ":id",
+                            "tokens",
+                            ":token_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "5247cc87-172b-41c3-b40c-fde307cc2b73",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Shortid of the sandbox to create the token for"
+                            },
+                            {
+                              "id": "b27c8cf4-b5b5-49b3-8582-1f6bf4731ffd",
+                              "key": "token_id",
+                              "value": "<string>",
+                              "description": "(Required) ID of the token to update. Does not accept the token itself."
+                            }
+                          ]
+                        },
+                        "description": "Update a Preview token that allow access to a private sandbox"
+                      },
+                      "response": [
+                        {
+                          "id": "7204e331-98ac-432d-a026-e82dcfe0a393",
+                          "name": "Token Update Response",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"expires_at\": \"<string,null-date-time>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/sandbox/:id/tokens/:token_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "sandbox",
+                                ":id",
+                                "tokens",
+                                ":token_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "token_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"success\": \"<boolean>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": {\n    \"sandbox_id\": \"<string>\",\n    \"token\": {\n      \"expires_at\": \"<string,null>\",\n      \"last_used_at\": \"<string,null>\",\n      \"token_id\": \"<string>\",\n      \"token_prefix\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-10-21T20:51:45.000Z",
+                          "updatedAt": "2026-10-21T20:51:45.000Z",
+                          "uid": "35240-7204e331-98ac-432d-a026-e82dcfe0a393"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:51:45.000Z",
+                      "updatedAt": "2026-10-21T20:51:45.000Z",
+                      "uid": "35240-8337ecdf-206b-4647-9bdf-60900f32e18e"
+                    }
+                  ],
+                  "id": "f21e07a7-fa0d-49e2-b4aa-c4f43675edb4",
+                  "createdAt": "2026-10-21T20:51:45.000Z",
+                  "updatedAt": "2026-10-21T20:51:45.000Z",
+                  "uid": "35240-f21e07a7-fa0d-49e2-b4aa-c4f43675edb4"
+                },
+                {
+                  "name": "List Preview Tokens",
+                  "id": "c62c4cd9-42fd-4595-ab9d-2dc3d2513373",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/sandbox/:id/tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sandbox",
+                        ":id",
+                        "tokens"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f6d82100-ff3c-4ce6-a2ff-9be99522035c",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Shortid of the sandbox to list the tokens for"
+                        }
+                      ]
+                    },
+                    "description": "List information about the preview tokens associated with the current sandbox"
+                  },
+                  "response": [
+                    {
+                      "id": "f61ad776-9473-41f1-9217-c52300d32b3e",
+                      "name": "Token List Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/sandbox/:id/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "sandbox",
+                            ":id",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"success\": \"<boolean>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": {\n    \"tokens\": [\n      {\n        \"expires_at\": \"<string,null>\",\n        \"last_used_at\": \"<string,null>\",\n        \"token_id\": \"<string>\",\n        \"token_prefix\": \"<string>\"\n      },\n      {\n        \"expires_at\": \"<string,null>\",\n        \"last_used_at\": \"<string,null>\",\n        \"token_id\": \"<string>\",\n        \"token_prefix\": \"<string>\"\n      }\n    ],\n    \"sandbox_id\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:51:45.000Z",
+                      "updatedAt": "2026-10-21T20:51:45.000Z",
+                      "uid": "35240-f61ad776-9473-41f1-9217-c52300d32b3e"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:51:45.000Z",
+                  "updatedAt": "2026-10-21T20:51:45.000Z",
+                  "uid": "35240-c62c4cd9-42fd-4595-ab9d-2dc3d2513373"
+                },
+                {
+                  "name": "Create a Preview Token",
+                  "id": "44fb7b58-1111-41cc-8c71-c70d748e4170",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"expires_at\": \"<string,null-date-time>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sandbox/:id/tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sandbox",
+                        ":id",
+                        "tokens"
+                      ],
+                      "variable": [
+                        {
+                          "id": "73ef4e28-cafc-4796-88d7-9ea411608475",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Shortid of the sandbox to create the token for"
+                        }
+                      ]
+                    },
+                    "description": "Create a new Preview token that allow access to a private sandbox"
+                  },
+                  "response": [
+                    {
+                      "id": "0f622e1d-d356-4d31-829e-4ff502a990d1",
+                      "name": "Token Create Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"expires_at\": \"<string,null-date-time>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/sandbox/:id/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "sandbox",
+                            ":id",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"success\": \"<boolean>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": {\n    \"sandbox_id\": \"<string>\",\n    \"token\": {\n      \"expires_at\": \"<string,null>\",\n      \"last_used_at\": \"<string,null>\",\n      \"token\": \"<string>\",\n      \"token_id\": \"<string>\",\n      \"token_prefix\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-21T20:51:45.000Z",
+                      "updatedAt": "2026-10-21T20:51:45.000Z",
+                      "uid": "35240-0f622e1d-d356-4d31-829e-4ff502a990d1"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:51:45.000Z",
+                  "updatedAt": "2026-10-21T20:51:45.000Z",
+                  "uid": "35240-44fb7b58-1111-41cc-8c71-c70d748e4170"
+                },
+                {
+                  "name": "Revoke preview tokens",
+                  "id": "875efecb-3bc4-4b28-b3cf-29c8290e8560",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/sandbox/:id/tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sandbox",
+                        ":id",
+                        "tokens"
+                      ],
+                      "variable": [
+                        {
+                          "id": "37831d07-a27a-46bd-b9fe-117d2e552996",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Shortid of the sandbox to revoke tokens for"
+                        }
+                      ]
+                    },
+                    "description": "Immediately expires all active preview tokens associated with this sandbox"
+                  },
+                  "response": [
+                    {
+                      "id": "168f14f8-f458-40ed-8d43-30c74538add2",
+                      "name": "RevokeAllPreviewTokensResponse",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/sandbox/:id/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "sandbox",
+                            ":id",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"success\": \"<boolean>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": {}\n}",
+                      "createdAt": "2026-10-21T20:51:45.000Z",
+                      "updatedAt": "2026-10-21T20:51:45.000Z",
+                      "uid": "35240-168f14f8-f458-40ed-8d43-30c74538add2"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:51:45.000Z",
+                  "updatedAt": "2026-10-21T20:51:45.000Z",
+                  "uid": "35240-875efecb-3bc4-4b28-b3cf-29c8290e8560"
+                }
+              ],
+              "id": "49c37fc0-5a62-49f7-8d53-b6f91b13cd2f",
+              "createdAt": "2026-10-21T20:51:45.000Z",
+              "updatedAt": "2026-10-21T20:51:45.000Z",
+              "uid": "35240-49c37fc0-5a62-49f7-8d53-b6f91b13cd2f"
+            }
+          ],
+          "id": "2bf329e4-5092-452f-8358-c8632895f6b3",
+          "createdAt": "2026-10-21T20:51:45.000Z",
+          "updatedAt": "2026-10-21T20:51:45.000Z",
+          "uid": "35240-2bf329e4-5092-452f-8358-c8632895f6b3"
+        }
+      ],
+      "id": "bc34f4d9-f455-4721-a007-62da525fa80c",
+      "createdAt": "2026-10-21T20:51:45.000Z",
+      "updatedAt": "2026-10-21T20:51:45.000Z",
+      "uid": "35240-bc34f4d9-f455-4721-a007-62da525fa80c"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.codesandbox.io"
+    }
+  ]
+}

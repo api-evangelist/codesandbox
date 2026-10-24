@@ -1,141 +1,151 @@
 {
+  "info": {
+    "_postman_id": "8fc8dca2-302f-4503-adb1-19fa7bcd9d83",
+    "name": "CodeSandbox Workspace API",
+    "description": "The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:52:18.000Z",
+    "updatedAt": "2026-10-21T20:52:18.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8fc8dca2-302f-4503-adb1-19fa7bcd9d83"
+  },
   "item": [
     {
-      "id": "c8aa4864-4cf6-4aa0-bc4c-43f90e0f5dc5",
-      "name": "workspace",
-      "description": {
-        "content": "Workspace and organization management",
-        "type": "text/plain"
-      },
+      "name": "org",
       "item": [
         {
-          "id": "8f9ec1da-6931-4ff1-87de-6c693a4120db",
-          "name": "Create a Workspace",
-          "request": {
-            "name": "Create a Workspace",
-            "description": {
-              "content": "Create a new, empty, workspace in the current organization\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "org",
-                "workspace"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "workspace",
+          "item": [
             {
-              "id": "701c10a9-21a6-4600-b2dc-abb7ca31f69e",
-              "name": "Workspace Create Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "org",
-                    "workspace"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+              "name": "Create a Workspace",
+              "id": "14ef036e-d935-46c8-8e2c-50e109c6e48e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
                 },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/org/workspace",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "org",
+                    "workspace"
+                  ]
+                },
+                "description": "Create a new, empty, workspace in the current organization"
               },
-              "status": "Created",
-              "code": 201,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "e8fb1657-2517-4779-b320-daa36ccad776",
+                  "name": "Workspace Create Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/org/workspace",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "org",
+                        "workspace"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": \"<boolean>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:52:19.000Z",
+                  "updatedAt": "2026-10-21T20:52:19.000Z",
+                  "uid": "35240-e8fb1657-2517-4779-b320-daa36ccad776"
                 }
               ],
-              "body": "{\n  \"success\": true,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"data\": {\n    \"id\": \"string\",\n    \"name\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T20:52:19.000Z",
+              "updatedAt": "2026-10-21T20:52:19.000Z",
+              "uid": "35240-14ef036e-d935-46c8-8e2c-50e109c6e48e"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "cbf6fbb1-4b4f-4460-866a-cf4434267fe0",
+          "createdAt": "2026-10-21T20:52:19.000Z",
+          "updatedAt": "2026-10-21T20:52:19.000Z",
+          "uid": "35240-cbf6fbb1-4b4f-4460-866a-cf4434267fe0"
         }
       ],
-      "event": []
+      "id": "87091b71-ab88-4107-a5e6-4003bc6e14c2",
+      "createdAt": "2026-10-21T20:52:19.000Z",
+      "updatedAt": "2026-10-21T20:52:19.000Z",
+      "uid": "35240-87091b71-ab88-4107-a5e6-4003bc6e14c2"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.codesandbox.io",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://api.codesandbox.io"
     }
-  ],
-  "info": {
-    "_postman_id": "fd122ed4-ebdf-4bca-bc75-c8744aff2e9b",
-    "name": "CodeSandbox meta workspace API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

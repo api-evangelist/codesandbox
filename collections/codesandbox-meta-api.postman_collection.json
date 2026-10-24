@@ -1,103 +1,110 @@
 {
+  "info": {
+    "_postman_id": "712a60b0-2fcb-4101-8feb-b26eefdf3668",
+    "name": "CodeSandbox Meta API",
+    "description": "The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:51:28.000Z",
+    "updatedAt": "2026-10-21T20:51:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-712a60b0-2fcb-4101-8feb-b26eefdf3668"
+  },
   "item": [
     {
-      "id": "4e6c4844-4d26-4107-8470-9065e76a23c8",
       "name": "meta",
-      "description": {
-        "content": "API metadata and auth context",
-        "type": "text/plain"
-      },
       "item": [
         {
-          "id": "4d2b4010-5033-4546-88e0-051904c72b3a",
-          "name": "Metadata about the API",
-          "request": {
-            "name": "Metadata about the API",
-            "description": {},
-            "url": {
-              "path": [
-                "meta",
-                "info"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "noauth"
-            }
-          },
-          "response": [
+          "name": "info",
+          "item": [
             {
-              "id": "b3769597-358c-4800-a23e-8c31025af4e5",
-              "name": "Meta Info Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "meta",
-                    "info"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+              "name": "Metadata about the API",
+              "id": "577b749b-4f07-4334-b2c2-8c7c0a348ab6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
                 },
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/meta/info",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meta",
+                    "info"
+                  ]
+                }
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "9c5bf95f-3fd0-4f79-a87b-1dd9434f6f4f",
+                  "name": "Meta Info Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meta/info",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meta",
+                        "info"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"api\": {\n    \"name\": \"<string>\",\n    \"latest_version\": \"<string>\"\n  },\n  \"auth\": {\n    \"scopes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"team\": \"<string,null-uuid>\",\n    \"version\": \"<string>\"\n  },\n  \"rate_limits\": {\n    \"concurrent_vms\": {\n      \"limit\": \"<integer>\",\n      \"remaining\": \"<integer>\"\n    },\n    \"sandboxes_hourly\": {\n      \"limit\": \"<integer>\",\n      \"remaining\": \"<integer>\",\n      \"reset\": \"<integer>\"\n    },\n    \"requests_hourly\": {\n      \"limit\": \"<integer>\",\n      \"remaining\": \"<integer>\",\n      \"reset\": \"<integer>\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-21T20:51:28.000Z",
+                  "updatedAt": "2026-10-21T20:51:28.000Z",
+                  "uid": "35240-9c5bf95f-3fd0-4f79-a87b-1dd9434f6f4f"
                 }
               ],
-              "body": "{\n  \"api\": {\n    \"name\": \"string\",\n    \"latest_version\": \"string\"\n  },\n  \"auth\": {\n    \"scopes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"team\": \"2eb0c8d9-d39c-62c4-21e3-720f18a289d5\",\n    \"version\": \"string\"\n  },\n  \"rate_limits\": {\n    \"concurrent_vms\": {\n      \"limit\": 5922,\n      \"remaining\": 3593\n    },\n    \"sandboxes_hourly\": {\n      \"limit\": 9851,\n      \"remaining\": 1552,\n      \"reset\": 1905\n    },\n    \"requests_hourly\": {\n      \"limit\": 4979,\n      \"remaining\": 6914,\n      \"reset\": 3102\n    }\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T20:51:28.000Z",
+              "updatedAt": "2026-10-21T20:51:28.000Z",
+              "uid": "35240-577b749b-4f07-4334-b2c2-8c7c0a348ab6"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "390a6c54-6ea2-48f4-bc1c-5c51441019d4",
+          "createdAt": "2026-10-21T20:51:28.000Z",
+          "updatedAt": "2026-10-21T20:51:28.000Z",
+          "uid": "35240-390a6c54-6ea2-48f4-bc1c-5c51441019d4"
         }
       ],
-      "event": []
+      "id": "fe8e5cfc-5b6e-4233-859b-da987c957485",
+      "createdAt": "2026-10-21T20:51:28.000Z",
+      "updatedAt": "2026-10-21T20:51:28.000Z",
+      "uid": "35240-fe8e5cfc-5b6e-4233-859b-da987c957485"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.codesandbox.io",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://api.codesandbox.io"
     }
-  ],
-  "info": {
-    "_postman_id": "63ae55d0-7503-48c0-8639-da80cf7e1a06",
-    "name": "CodeSandbox meta API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The CodeSandbox API provides programmatic access to create, manage, and control sandboxes and virtual machines (devboxes) backed by Firecracker microVMs. Authenticated via Bearer token obtained from codesandbox.io/t/api.",
-      "type": "text/plain"
-    }
-  }
+  ]
 }
