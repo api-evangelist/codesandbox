@@ -1,4 +1,4 @@
-# CodeSandbox (codesandbox)
+# CodeSandbox
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,61 +64,170 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-CodeSandbox is a browser-based development environment platform that enables developers to create, share, and collaborate on interactive coding sandboxes instantly in the browser. It provides Firecracker microVM-backed cloud infrastructure for running isolated development environments, AI sandboxes, and live code experiences at scale. The platform serves individual developers, professional teams, and AI product builders needing concurrent sandboxed environments.
+CodeSandbox is a browser-based development environment platform that enables developers to create, share, and collaborate on interactive coding sandboxes instantly in the browser. The platform provides a cloud-based IDE with Firecracker microVM infrastructure that supports snapshotting, cloning, and running isolated development environments at scale. CodeSandbox offers the CodeSandbox SDK for programmatically spinning up AI sandboxes and development environments, the Sandpack component toolkit for embedding live-running code editing experiences, and a browser sandbox Define API for generating sandboxes on the fly from code examples. Trusted by over 4.5 million developers monthly, it serves individual developers, professional teams, and AI product builders needing concurrent sandboxed environments.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/codesandbox/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/codesandbox/refs/heads/main/apis.yml)
+**Areas:** Developer Tools · Cloud IDE · Code Sandboxes · Browser Development · AI Sandboxes · Code Embedding
 
-**Naftiko Run:** [https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=codesandbox-api-evangelist&utm_content=repo](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=codesandbox-api-evangelist&utm_content=repo)
+## CodeSandbox on APIs.io
 
-## Tags
+Everything profiled for CodeSandbox is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/codesandbox/](https://apis.io/providers/codesandbox/)** — or go straight to one of the APIs or properties below.
 
-- Developer Tools
-- Cloud IDE
-- Code Sandboxes
-- Browser Development
-- AI Sandboxes
-- Code Embedding
-- Virtual Machines
+### APIs (10)
 
-## APIs
+- [CodeSandbox Define API](https://apis.io/apis/codesandbox/define-api/) — The Define API allows programmatic creation of browser sandboxes from code files, useful for documentation sites and code examples that need to generate a…
+- [Sandpack Embed Toolkit](https://apis.io/apis/codesandbox/sandpack/) — Sandpack is an open-source component toolkit for creating live-running code editing experiences powered by CodeSandbox. It supports React via…
+- [CodeSandbox Meta API](https://apis.io/apis/codesandbox/codesandbox-meta-api/) — API metadata and auth context
+- [CodeSandbox Preview Host API](https://apis.io/apis/codesandbox/codesandbox-preview-host-api/) — Trusted preview host management
+- [CodeSandbox Preview Token API](https://apis.io/apis/codesandbox/codesandbox-preview-token-api/) — Preview token management for private sandboxes
+- [CodeSandbox Sandbox API](https://apis.io/apis/codesandbox/codesandbox-sandbox-api/) — Browser and VM sandbox management
+- [CodeSandbox Templates API](https://apis.io/apis/codesandbox/codesandbox-templates-api/) — Sandbox template management
+- [CodeSandbox Token API](https://apis.io/apis/codesandbox/codesandbox-token-api/) — API token management
+- [CodeSandbox Vm API](https://apis.io/apis/codesandbox/codesandbox-vm-api/) — Virtual machine lifecycle management
+- [CodeSandbox Workspace API](https://apis.io/apis/codesandbox/codesandbox-workspace-api/) — Workspace and organization management
 
-- **CodeSandbox SDK API** — Programmatic access to spin up isolated Firecracker microVM-backed development environments; authenticated via API key token.
-  - Docs: [https://codesandbox.io/docs/sdk](https://codesandbox.io/docs/sdk)
-  - GitHub: [https://github.com/codesandbox/codesandbox-sdk](https://github.com/codesandbox/codesandbox-sdk)
+### Published properties
 
-- **CodeSandbox Define API** — REST API for programmatically creating browser sandboxes from code files on the fly.
-  - Docs: [https://codesandbox.io/docs/learn/browser-sandboxes/cli-api](https://codesandbox.io/docs/learn/browser-sandboxes/cli-api)
-  - Endpoint: `POST https://codesandbox.io/api/v1/sandboxes/define`
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Sandpack Embed Toolkit** — Open-source component toolkit for embedding live-running code editors and previews in web pages.
-  - Docs: [https://sandpack.codesandbox.io/docs](https://sandpack.codesandbox.io/docs)
-  - GitHub: [https://github.com/codesandbox/sandpack](https://github.com/codesandbox/sandpack)
+#### Agentic access (1)
 
-## Plans / Rate Limits / FinOps
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Plans & Pricing](plans/codesandbox-plans-pricing.yml) — Free (400 credits/month), Build ($9/mo, 40 VM hours), Scale ($119/mo, 100 VM hours, 250 concurrent VMs), Enterprise (custom)
-- [Rate Limits](rate-limits/codesandbox-rate-limits.yml) — Concurrent VM caps: 10 (Free/Build), 250 (Scale); billing rounds up to nearest minute
-- [FinOps](finops/codesandbox-finops.yml) — FOCUS-aligned; credits at $0.01486/credit, on-demand VM at $0.15/hour (Nano)
+- [Codesandbox Agentic Access](https://apis.io/agentic-access/codesandbox/codesandbox-agentic-access/)
 
-## Timestamps
+#### JSON Schema (4)
 
-- **Created:** 2026-06-12
-- **Modified:** 2026-06-12
+The data models the API reads and writes.
 
-## Common Properties
+- [MetaInformation](https://apis.io/schemas/codesandbox/codesandbox-meta-information/)
+- [PreviewToken](https://apis.io/schemas/codesandbox/codesandbox-preview-token/)
+- [Sandbox](https://apis.io/schemas/codesandbox/codesandbox-sandbox/)
+- [VMStartResponse](https://apis.io/schemas/codesandbox/codesandbox-vm-start-response/)
 
-| Type | URL |
-|------|-----|
-| Website | [https://codesandbox.io](https://codesandbox.io) |
-| Documentation | [https://codesandbox.io/docs/learn](https://codesandbox.io/docs/learn) |
-| GitHub Organization | [https://github.com/codesandbox](https://github.com/codesandbox) |
-| LinkedIn | [https://www.linkedin.com/company/codesandbox](https://www.linkedin.com/company/codesandbox) |
-| X (Twitter) | [https://x.com/codesandbox](https://x.com/codesandbox) |
-| Blog | [https://codesandbox.io/blog](https://codesandbox.io/blog) |
-| Changelog | [https://codesandbox.io/changelog](https://codesandbox.io/changelog) |
-| Pricing | [https://codesandbox.io/pricing](https://codesandbox.io/pricing) |
-| Status Page | [https://status.codesandbox.io](https://status.codesandbox.io) |
+#### JSON-LD (1)
 
-## Maintainers
+Linked-data contexts for the provider's vocabulary.
 
-- **Kin Lane** — [kin@apievangelist.com](mailto:kin@apievangelist.com)
+- [Codesandbox Context](https://apis.io/jsonld/codesandbox/codesandbox-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [CodeSandbox API Vocabulary](https://apis.io/vocabularies/codesandbox/codesandbox-vocabulary/)
+
+#### Examples (4)
+
+Example requests and responses.
+
+- [Codesandbox Sandbox Create Example](https://apis.io/examples/codesandbox/codesandbox-sandbox-create-example/)
+- [Codesandbox Sandbox List Example](https://apis.io/examples/codesandbox/codesandbox-sandbox-list-example/)
+- [Codesandbox Vm Create Session Example](https://apis.io/examples/codesandbox/codesandbox-vm-create-session-example/)
+- [Codesandbox Vm Start Example](https://apis.io/examples/codesandbox/codesandbox-vm-start-example/)
+
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [CodeSandbox meta API](https://apis.io/collections/codesandbox/open-codesandbox-meta-api/)
+- [CodeSandbox meta sandbox API](https://apis.io/collections/codesandbox/open-codesandbox-sandbox-api/)
+- [CodeSandbox meta templates API](https://apis.io/collections/codesandbox/open-codesandbox-templates-api/)
+- [CodeSandbox meta token API](https://apis.io/collections/codesandbox/open-codesandbox-token-api/)
+- [CodeSandbox meta vm API](https://apis.io/collections/codesandbox/open-codesandbox-vm-api/)
+- [CodeSandbox meta workspace API](https://apis.io/collections/codesandbox/open-codesandbox-workspace-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [CodeSandbox — jsonschema rules](https://apis.io/rules/codesandbox/codesandbox-jsonschema-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Codesandbox Authentication](https://apis.io/security/codesandbox/codesandbox-authentication/)
+- [Codesandbox Domain Security](https://apis.io/security/codesandbox/codesandbox-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Codesandbox Plans Pricing](https://apis.io/plans/codesandbox/codesandbox-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Codesandbox Rate Limits](https://apis.io/rate-limits/codesandbox/codesandbox-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Codesandbox Finops](https://apis.io/finops/codesandbox/codesandbox-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://codesandbox.io)
+- [Documentation](https://codesandbox.io/docs/learn)
+- [Pricing](https://codesandbox.io/pricing)
+- [Changelog](https://codesandbox.io/changelog)
+- [Blog](https://codesandbox.io/blog)
+- [GitHub](https://github.com/codesandbox)
+- [Status](https://status.codesandbox.io)
+
+## API Evangelist rating
+
+**Kin Score 36.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 60.8 |
+| Contract governance | 23.5 |
+| Operational transparency | 34.2 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 18.4 |
+
+**Agent readiness 20.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/codesandbox/](https://apis.io/providers/codesandbox/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for CodeSandbox: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/codesandbox/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
